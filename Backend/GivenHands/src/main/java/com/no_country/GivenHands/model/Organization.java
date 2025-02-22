@@ -1,5 +1,7 @@
 package com.no_country.GivenHands.model;
 
+import com.no_country.GivenHands.model.enumeration.Cause;
+import com.no_country.GivenHands.model.enumeration.Rol;
 import jakarta.persistence.*;
 import lombok.*;
 
