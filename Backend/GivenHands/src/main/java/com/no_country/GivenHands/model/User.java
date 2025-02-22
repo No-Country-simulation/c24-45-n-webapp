@@ -1,5 +1,7 @@
 package com.no_country.GivenHands.model;
 
+import com.no_country.GivenHands.model.enumeration.Rol;
+import com.no_country.GivenHands.model.enumeration.Skill;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +26,7 @@ public class User {
     private String location;
     @Enumerated(EnumType.STRING)
     private Rol rol;
+    @Embedded
     private Address address;
     private String disponibilidad;
     @Enumerated(EnumType.STRING)
