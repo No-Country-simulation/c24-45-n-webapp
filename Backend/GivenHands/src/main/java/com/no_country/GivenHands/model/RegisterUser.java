@@ -1,5 +1,6 @@
 package com.no_country.GivenHands.model;
 
+import com.no_country.GivenHands.model.enumeration.Rol;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,12 +12,15 @@ public class RegisterUser {
     private String userName;
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
-    public RegisterUser(Long id, String userName, String email, String password) {
+    public RegisterUser(Long id, String userName, String email, String password, Rol rol) {
         this.id = id;
         this.userName = userName;
         this.email = email;
         this.password = password;
+        this.rol = rol;
     }
 
     public RegisterUser() {
@@ -54,5 +58,11 @@ public class RegisterUser {
         this.password = password;
     }
 
+    public Rol getRol() {
+        return rol;
+    }
 
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
 }
