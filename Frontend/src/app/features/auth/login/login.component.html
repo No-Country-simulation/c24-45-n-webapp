@@ -1,49 +1,60 @@
-<div class="bg-[url('assets/fondo.svg')] bg-cover bg-center min-h-screen flex items-center justify-center">
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 border border-gray-300 px-10 py-5 bg-white rounded-2xl w-auto pt-10">
-        <div>
-            <h1 class="text-4xl pb-5 font-semibold">Bienvenido</h1>
-            <h2 class="text-md">Ingresa tus datos para continuar</h2>
-        </div>
+<button class="px-4 py-2 bg-green-600 text-white rounded" (click)="toggleModal()">Login</button>
 
-        <div class="flex flex-col gap-5 py-5">
 
+@if (isModalOpen) {
+    <div class="fixed inset-0 flex items-center justify-center bg-[#00765a] bg-opacity-50">
+        <div class="bg-white p-6 rounded-2xl shadow-lg w-[400px] relative">
             
-            <label class="flex flex-col gap-1">
-                <input formControlName="email" type="email" placeholder="Correo electronico" class="border-b-2 border-gray-400 p-2 focus:outline-none focus:border-green-500 transition-all duration-300"  required>
-            </label>
-            @if (isFieldValid('email')) {
-                <p class="text-red-500 text-sm">El correo electronico debe ser valido.</p>
-            }
+            <button (click)="toggleModal()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
 
-            <label>
-                <input formControlName="password" type="password" placeholder="Contraseña" class="border-b-2 border-gray-400 p-2 focus:outline-none focus:border-green-500 transition-all duration-300 w-full" required>
-            </label>
-            @if(isFieldValid('password')){
-                <p class="text-red-500 text-sm">La contraseña es requerida</p>
-            }
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 px-10 py-5 w-auto pt-10">
+                <div>
+                    <h1 class="text-4xl pb-5 font-semibold">Bienvenido</h1>
+                    <h2 class="text-md">Ingresa tus datos para continuar</h2>
+                </div>
 
-            <label>
-                <input formControlName="confirmPassword" type="password" placeholder="Confirmar contraseña" class="border-b-2 border-gray-400 p-2 focus:outline-none focus:border-green-500 transition-all duration-300 w-full" required>
-            </label>
-            @if(isFieldValid('confirmPassword')){
-                <p class="text-red-500 text-sm">Las contraseñas deben coincidir.</p>
-            }
+                <div class="flex flex-col gap-5 py-5">
+                    <label class="flex flex-col gap-1">
+                        <input formControlName="email" type="email" placeholder="Correo electrónico"
+                            class="border-b-2 border-gray-400 p-2 focus:outline-none focus:border-green-500 transition-all duration-300" required>
+                    </label>
+                    @if (isEmailInvalid()) {
+                        <p class="text-red-500 text-sm">El correo electrónico debe ser válido.</p>
+                    }
+
+                    <label>
+                        <input formControlName="password" type="password" placeholder="Contraseña"
+                            class="border-b-2 border-gray-400 p-2 focus:outline-none focus:border-green-500 transition-all duration-300 w-full" required>
+                    </label>
+                    @if (isFieldInvalid('password')) {
+                        <p class="text-red-500 text-sm">La contraseña es requerida.</p>
+                    }
+
+                    <label>
+                        <input formControlName="confirmPassword" type="password" placeholder="Confirmar contraseña"
+                            class="border-b-2 border-gray-400 p-2 focus:outline-none focus:border-green-500 transition-all duration-300 w-full" required>
+                    </label>
+                    @if (isConfirmPasswordInvalid()) {
+                        <p class="text-red-500 text-sm">Las contraseñas deben coincidir.</p>
+                    }
+                </div>
+
+                <p class="text-gray-700">
+                    ¿Aún no tienes una cuenta?
+                    <a href="#register" class="text-blue-500 hover:underline font-semibold">Regístrate</a>
+                </p>
+
+                <button type="submit"
+                    class="cursor-pointer relative group overflow-hidden border-2 px-10 py-3 border-green-500 rounded-lg">
+                    <span class="font-bold text-white text-xl relative z-10 group-hover:text-green-500 duration-500">Iniciar
+                        sesión</span>
+                    <span class="absolute top-0 left-0 w-full bg-green-500 duration-500 group-hover:-translate-x-full h-full"></span>
+                    <span class="absolute top-0 left-0 w-full bg-green-500 duration-500 group-hover:translate-x-full h-full"></span>
+                    <span class="absolute top-0 left-0 w-full bg-green-500 duration-500 delay-300 group-hover:-translate-y-full h-full"></span>
+                    <span class="absolute delay-300 top-0 left-0 w-full bg-green-500 duration-500 group-hover:translate-y-full h-full"></span>
+                </button>
+            </form>
         </div>
-
-        <p class="text-gray-700">
-            ¿Aún no tienes una cuenta?  
-            <a href="#register" class="text-blue-500 hover:underline font-semibold">Regístrate</a>
-        </p>
-
-        <button type="submit" class="cursor-pointer relative group overflow-hidden border-2 px-10 py-3 border-green-500 rounded-lg">
-        <span class="font-bold text-white text-xl relative z-10 group-hover:text-green-500 duration-500">Iniciar sesion</span>
-        <span class="absolute top-0 left-0 w-full bg-green-500 duration-500 group-hover:-translate-x-full h-full"></span>
-        <span class="absolute top-0 left-0 w-full bg-green-500 duration-500 group-hover:translate-x-full h-full"></span>
-        
-        <span class="absolute top-0 left-0 w-full bg-green-500 duration-500 delay-300 group-hover:-translate-y-full h-full"></span>
-        <span class="absolute delay-300 top-0 left-0 w-full bg-green-500 duration-500 group-hover:translate-y-full h-full"></span>
-        </button>
-
-    </form>
-</div>
+    </div>
+}

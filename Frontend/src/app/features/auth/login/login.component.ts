@@ -11,43 +11,69 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class LoginComponent {
   loginForm: FormGroup;
   passwordVisibility = false;
+  isModalOpen = false;
   formSubmitted = false;
 
   constructor(private fb: FormBuilder) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]]
-    }, { validators: this.passwordMatchValidator }); // 🔥 Corregido el uso de validadores
+    this.loginForm = this.fb.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required]],
+        confirmPassword: ['', [Validators.required]]
+      },
+      { validators: this.passwordMatchValidator }
+    );
   }
 
-  togglePasswordVisibility() {
-    this.passwordVisibility = !this.passwordVisibility;
+  //para validar el campo email y que este no sea invalido
+  isEmailInvalid() {
+    const emailControl = this.loginForm.get('email');
+    return emailControl?.invalid && emailControl?.value !== '';
   }
 
-  passwordMatchValidator(formGroup: FormGroup) {
-    const password = formGroup.get('password');
-    const confirmPassword = formGroup.get('confirmPassword');
+  //para validar los campos de password y confirmar password
+  isConfirmPasswordInvalid() {
+    const confirmPasswordControl = this.loginForm.get('confirmPassword');
+    const passwordControl = this.loginForm.get('password');
 
-    if (password?.value !== confirmPassword?.value) {
-      confirmPassword?.setErrors({ passwordMismatch: true });
-    } else {
-      confirmPassword?.setErrors(null);
+    if(!confirmPasswordControl || !passwordControl) {
+      return false;
+    }
+    
+    return confirmPasswordControl?.value !== '' && passwordControl?.value !== confirmPasswordControl?.value;
+  }
+
+  //para mostrar u ocultar el modal de login, ver si puedo mejorarlo
+  toggleModal() {
+    this.isModalOpen = !this.isModalOpen;
+    if(!this.isModalOpen) {
+      this.loginForm.reset();
+      this.formSubmitted = false;
     }
   }
 
-  isFieldValid(fieldName: string) {
+  //para verificar que el password y confirmar password sean iguales en tiempo real
+  passwordMatchValidator(formGroup: FormGroup) {
+    const password = formGroup.get('password')?.value;
+    const confirmPassword = formGroup.get('confirmPassword')?.value;
+
+    return password === confirmPassword ? null : { passwordMismatch: true };
+
+  }
+
+  //para manejar las invalidaciones
+  isFieldInvalid(fieldName: string) {
     const control = this.loginForm.get(fieldName);
     return control?.invalid && this.formSubmitted;
   }
 
+  //para enviar el formulario, falta implementar la logica de envio
   onSubmit() {
     this.formSubmitted = true;
     if (this.loginForm.valid) {
-      const userData = this.loginForm.value;
-      console.log('Formulario de login:', userData);
-    } else {
-      console.log('Formulario inválido');
+      console.log(this.loginForm.value);
+    }else{
+      console.log('Form is invalid');
     }
   }
 }
