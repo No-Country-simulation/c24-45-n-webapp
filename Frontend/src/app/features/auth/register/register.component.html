@@ -13,9 +13,9 @@
         <p class="text-md mt-2 pb-2">Crea una cuenta para empezar a hacer tu voluntariado.</p>
 
         <!-- Nombre y Apellidos -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div class="grid grid-cols-1 gap-5">
           <div class="flex flex-col">
-            <input formControlName="name" type="text" class="mt-1 p-2 border border-black rounded-md" placeholder="Nombre" required>
+            <input formControlName="name" type="text" class="mt-1 p-2 border border-black rounded-md" placeholder="Nombre de usuario" required>
             @if (isFieldValid('name')) {
               <div class="text-red-500 text-sm">
                 @if (registerForm.get('name')?.hasError('required')) {
@@ -27,69 +27,6 @@
               </div>
             }
           </div>
-
-          <div class="flex flex-col">
-            <input formControlName="lastName" type="text" class="mt-1 p-2 border border-black rounded-md" placeholder="Apellidos" required>
-            @if (isFieldValid('lastName')) {
-              <div class="text-red-500 text-sm">
-                @if (registerForm.get('lastName')?.hasError('required')) {
-                  El apellido es requerido.
-                }
-                @if (registerForm.get('lastName')?.hasError('minlength')) {
-                  El apellido debe tener al menos 3 caracteres.
-                }
-              </div>
-            }
-          </div>
-        </div>
-
-        <!-- Edad y Teléfono -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div class="flex flex-col">
-            <input formControlName="age" type="number" class="mt-1 p-2 border border-black rounded-md" placeholder="Ingresa tu edad" min="0" required>
-            @if (isFieldValid('age')) {
-              <div class="text-red-500 text-sm">
-                @if (registerForm.get('age')?.hasError('required')) {
-                  La edad es requerida.
-                }
-                @if (registerForm.get('age')?.hasError('min')) {
-                  Debes ser mayor de 18 años.
-                }
-                @if (registerForm.get('age')?.hasError('pattern')) {
-                  La edad debe ser un número válido.
-                }
-              </div>
-            }
-          </div>
-
-          <div class="flex flex-col">
-            <input formControlName="phone" type="tel" class="mt-1 p-2 border border-black rounded-md" placeholder="Ingresa tu número de teléfono" required>
-            @if (isFieldValid('phone')) {
-              <div class="text-red-500 text-sm">
-                @if (registerForm.get('phone')?.hasError('required')) {
-                  El número de teléfono es requerido.
-                }
-                @if (registerForm.get('phone')?.hasError('pattern')) {
-                  El número de teléfono debe contener entre 9 y 15 dígitos.
-                }
-              </div>
-            }
-          </div>
-        </div>
-
-        <!-- Dirección -->
-        <div class="flex flex-col">
-          <input formControlName="address" type="text" class="mt-1 p-2 border border-black rounded-md" placeholder="Ingresa tu dirección" maxlength="100" required>
-          @if (isFieldValid('address')) {
-            <div class="text-red-500 text-sm">
-              @if (registerForm.get('address')?.hasError('required')) {
-                La dirección es requerida.
-              }
-              @if (registerForm.get('address')?.hasError('minlength')) {
-                La dirección debe tener al menos 10 caracteres.
-              }
-            </div>
-          }
         </div>
 
         <!-- Email -->
@@ -133,19 +70,6 @@
               @if (registerForm.hasError('passwordMismatch')) {
                 Las contraseñas no coinciden.
               }
-            </div>
-          }
-        </div>
-
-        <div class="flex flex-col">
-          <select formControlName="userType" class="mt-1 p-2 border border-black rounded-md" required>
-            <option value="" disabled selected>Selecciona si eres Organización o Voluntario</option>
-            <option value="organizacion">Organización</option>
-            <option value="voluntario">Voluntario</option>
-          </select>
-          @if (isFieldValid('userType')) {
-            <div class="text-red-500 text-sm">
-              Debe seleccionar un tipo de usuario.
             </div>
           }
         </div>
