@@ -9,10 +9,10 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-
 export class RegisterComponent {
   registerForm: FormGroup;
   formSubmitted = false;
+  isModalOpen = false;
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group(
@@ -20,46 +20,81 @@ export class RegisterComponent {
         name: ['', [Validators.required, Validators.minLength(3)]],
         lastName: ['', [Validators.required, Validators.minLength(3)]],
         age: ['', [Validators.required, Validators.min(18), Validators.pattern('^[0-9]*$')]],
-        phone: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+        phone: ['', [Validators.required, Validators.pattern('^[0-9]{9,15}$')]],
         address: ['', [Validators.required, Validators.minLength(10)]],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: ['', [Validators.required]],
         userType: ['', [Validators.required]]
       },
-      { validators: this.passwordsMatchValidator } //necesario! es para que se use el validador de las contraseñas
+      { validators: this.passwordMatchValidator }
     );
   }
 
-  // Valido si las contraseñas coinciden
-  passwordsMatchValidator(formGroup: FormGroup) {
-    const password = formGroup.get('password');
-    const confirmPassword = formGroup.get('confirmPassword');
-    if (password?.value !== confirmPassword?.value) {
-      confirmPassword?.setErrors({ passwordsMatch: true });
-    } else {
-      confirmPassword?.setErrors(null);
+  // es para abrir y cerrar el modal
+  toggleModal() {
+    this.isModalOpen = !this.isModalOpen;
+    if(!this.isModalOpen) {
+      this.registerForm.reset();
+      this.formSubmitted = false;
     }
   }
 
-  // Para verificar si los campos son validos y hacer que muestre los errores.
-  isFieldValid(fieldName: string) {
+  //con esto puedo validar y verificar que las contraseñas coincidan
+  passwordMatchValidator(formGroup: FormGroup) {
+    const password = formGroup.get('password')?.value;
+    const confirmPassword = formGroup.get('confirmPassword')?.value;
+
+    return password === confirmPassword ? null : { passwordMismatch: true };
+  }
+
+  // Para poder verificar si el campo de email es valido
+  isEmailInvalid(): boolean {
+    const emailControl = this.registerForm.get('email');
+    if (!emailControl) {
+      return false;
+    }
+    return emailControl.invalid && (emailControl.touched || this.formSubmitted);
+  }
+
+  // con esto valido si el campo de confirmacion es valido
+  isConfirmPasswordInvalid(): boolean {
+    const confirmPasswordControl = this.registerForm.get('confirmPassword');
+    const passwordControl = this.registerForm.get('password');
+
+    if (!confirmPasswordControl || !passwordControl) {
+      return false;
+    }
+
+    // muestro los errores cuando el usuario toca el input o envia el formularo
+    if (confirmPasswordControl.touched || this.formSubmitted) {
+      if (confirmPasswordControl.hasError('required')) {
+        return true;
+      }
+
+      if (this.registerForm.hasError('passwordMismatch')) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  // Verificar si algun campo es inválido
+  isFieldValid(fieldName: string): boolean {
     const control = this.registerForm.get(fieldName);
-    return control?.invalid && this.formSubmitted;
+    return control ? control.invalid && (control.touched || this.formSubmitted) : false;
   }
 
-  // Con esto las verifico las contraseñas que sean iguales
-  getPasswordMatch() {
-    return this.registerForm.get('password')?.value === this.registerForm.get('confirmPassword')?.value;
-  }
-
-  //Esto es la logica que contiene al enviar el formulario, debo agregar la logica de envio de datos al backend
+  // Para enviar el formulario, me falta la lógica de enviar los datos al servidor
   onSubmit() {
     this.formSubmitted = true;
+
     if (this.registerForm.valid) {
       const userData = this.registerForm.value;
       console.log('Formulario de registro:', userData);
-
+      this.registerForm.reset();
+      this.formSubmitted = false;
     } else {
       console.log('Formulario no válido');
     }
