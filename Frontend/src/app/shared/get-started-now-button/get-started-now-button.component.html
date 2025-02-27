@@ -1,0 +1,12 @@
+<button
+  class="cursor-pointer font-semibold flex items-center justify-center gap-3 px-6 py-3 rounded-full transition-colors"
+   [ngClass]="{
+    'w-full': size() === SizeType.LARGE,
+    'w-56 py-6': size()=== SizeType.MEDIUM,
+    'w-20': size() === SizeType.SMALL,
+    '': size() === SizeType.DEFAULT,
+    'bg-white text-emerald-800 hover:text-emerald-600 hover:bg-emerald-600':invertStyle()===false,
+    'bg-emerald-800 text-white hover:text-emerald-100 hover:bg-emerald-600':invertStyle()===true,
+  }">
+  {{text()}}
+</button>
