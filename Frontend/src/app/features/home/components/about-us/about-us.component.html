@@ -1,0 +1,31 @@
+<div class="min-h-screen bg-white relative flex flex-col pb-20">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="#047857" fill-opacity="1"
+      d="M0,192L30,192C60,192,120,192,180,197.3C240,203,300,213,360,202.7C420,192,480,160,540,133.3C600,107,660,85,720,64C780,43,840,21,900,21.3C960,21,1020,43,1080,69.3C1140,96,1200,128,1260,122.7C1320,117,1380,75,1410,53.3L1440,32L1440,0L1410,0C1380,0,1320,0,1260,0C1200,0,1140,0,1080,0C1020,0,960,0,900,0C840,0,780,0,720,0C660,0,600,0,540,0C480,0,420,0,360,0C300,0,240,0,180,0C120,0,60,0,30,0L0,0Z">
+    </path>
+  </svg>
+  <div class="flex flex-col gap-20 items-center">
+    <div class="flex flex-row gap-20 justify-center items-center">
+      <div class="border-4 w-96 h-96 border-emerald-800 p-20 rounded-full">
+      <img class="w-full h-full object-contain" src="./images/mission-icon.svg" alt="">
+    </div>
+    <div class="flex flex-col max-w-2xl gap-5">
+      <h1 class="text-3xl font-bold ">Our Mission</h1>
+      <h3 class="text-lg">"Is to connect people willing to give their best to create a positive impact in the community. Through volunteering opportunities, we aim to transform lives, promote solidarity, and build a fairer and more equitable future for all."</h3>
+    </div>
+  </div>
+  <div class="flex flex-row gap-20 justify-center items-center">
+    <div class="flex flex-col max-w-2xl gap-5">
+      <h1 class="text-3xl font-bold">Why Choose to Work with Us</h1>
+      <h3 class="text-lg">Join our volunteer team and make a difference! Working with us means becoming part of a community passionate about
+      positive change. We offer a collaborative environment where your time and effort are valued, and you’ll have the
+      opportunity to directly impact those who need it most. If you're looking for personal growth, new experiences, and a
+      meaningful way to contribute, this is the perfect place for you. Together, we can achieve great things!</h3>
+      </div>
+      <div class="border-4 w-96 h-96 border-emerald-800 rounded-full overflow-hidden">
+        <img class="w-96 h-96 object-cover" src="./images/volunteers.jpeg" alt="">
+      </div>
+    </div>
+    <get-started-now-button [size]="SizeType.MEDIUM" text="Join Us" [invertStyle]="true" />
+  </div>
+</div>
