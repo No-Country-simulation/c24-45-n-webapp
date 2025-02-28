@@ -7,7 +7,6 @@ import lombok.*;
 
 @Entity
 @Table(name = "organizations")
-@EqualsAndHashCode
 public class Organization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -8,12 +8,6 @@ import lombok.*;
 import java.time.LocalDateTime;
 @Entity
 @Table(name = "projects")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EqualsAndHashCode
 public class Project {
 
         @Id
