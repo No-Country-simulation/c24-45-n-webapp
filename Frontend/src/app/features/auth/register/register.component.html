@@ -1,18 +1,25 @@
 
-<button class="px-4 py-2 bg-green-600 text-white rounded" (click)="toggleModal()">Login</button>
 
-@if (isModalOpen) {
-  <div class="fixed inset-0 flex items-center justify-center bg-[#00765a] bg-opacity-50">
-    <div class="bg-white p-6 rounded-2xl shadow-lg w-[90%] max-w-[400px] max-h-[92vh] overflow-y-auto relative">
-      <button class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-3xl" (click)="toggleModal()">
-        &times;
-      </button>
+  <div class=" grid grid-cols-1 sm:grid-cols-2 bg-[#00765a] bg-opacity-50 min-h-screen">
 
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+    <div  class="hidden bg-[#00765a] min-h-screen sm:flex flex-col justify-center items-center p-10">
+      <img src="/assets/LogoGiveHand1.svg" class="w-3xl h-3xl mr-5 lg:mr-10 mt-[-60px]" alt="Hola">
+      <h1 class="text-[38px] lg:text-[48px] pl-5 text-white mt-[-40px] lg:mt-[-80px] lg:w-full ">One more hand could change the world</h1>
+    </div>
+
+    
+    <div class=" sm:bg-white p-6 sm:p-10 flex flex-col justify-center items-center shadow-lg relative sm:rounded-l-[100px] lg:rounded-l-[250px]">
+      <h3 class="absolute w-full top-20 md:top-6 lg:top-30 flex justify-center items-center text-xl text-white md:text-black">Already have an account? <a class="ml-2 text-blue-600 font-semibold hover:bg-blue-600 hover:text-white p-2 rounded-2xl transition-colors duration-500" href="/Login">Sign in</a></h3>
+
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 border p-[30px] rounded-md 
+      shadow-[0_8px_20px_rgba(0,0,0,0.3)] 
+      hover:shadow-[0_12px_30px_rgba(0,0,0,0.4)] 
+      transition-shadow duration-300 mt-10 bg-white">
         <h1 class="text-4xl font-semibold mt-5">Regístrate</h1>
         <p class="text-md mt-2 pb-2">Crea una cuenta para empezar a hacer tu voluntariado.</p>
 
-        <!-- Nombre y Apellidos -->
+        <!-- Nombre de usuario -->
         <div class="grid grid-cols-1 gap-5">
           <div class="flex flex-col">
             <input formControlName="name" type="text" class="mt-1 p-2 border border-black rounded-md" placeholder="Nombre de usuario" required>
@@ -58,6 +65,7 @@
             </div>
           }
         </div>
+        
 
         <!-- Confirmar Contraseña -->
         <div class="flex flex-col">
@@ -74,9 +82,11 @@
           }
         </div>
 
-        <p class="text-md text-gray-700">¿Ya tienes una cuenta? <a href="/login" class="text-blue-600 inline ml-2 text-md font-semibold">Inicia sesión</a></p>
-        <button type="submit" class="mt-4 p-2 bg-[#00765a] text-white rounded-md cursor-pointer">Registrarse</button>
+        <!--<p class="text-md text-gray-700">¿Ya tienes una cuenta? <a href="/login" class="text-blue-600 inline ml-2 text-md font-semibold">Inicia sesión</a></p> -->
+        <button type="submit" class="mt-4 p-2 bg-[#00765a] text-white rounded-md cursor-pointer flex justify-center items-center gap-2">
+          <img src="/assets/iconperson1.png" class="w-[25px] h-[25px]" alt="icono de persona">
+          Registrarse
+        </button>
       </form>
     </div>
   </div>
-}

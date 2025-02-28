@@ -12,7 +12,6 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 export class RegisterComponent {
   registerForm: FormGroup;
   formSubmitted = false;
-  isModalOpen = false;
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group(
@@ -26,14 +25,6 @@ export class RegisterComponent {
     );
   }
 
-  // es para abrir y cerrar el modal
-  toggleModal() {
-    this.isModalOpen = !this.isModalOpen;
-    if(!this.isModalOpen) {
-      this.registerForm.reset();
-      this.formSubmitted = false;
-    }
-  }
 
   //con esto puedo validar y verificar que las contraseñas coincidan
   passwordMatchValidator(formGroup: FormGroup) {
