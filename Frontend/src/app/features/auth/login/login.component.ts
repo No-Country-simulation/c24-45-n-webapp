@@ -11,7 +11,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class LoginComponent {
   loginForm: FormGroup;
   passwordVisibility = false;
-  isModalOpen = false;
   formSubmitted = false;
 
   constructor(private fb: FormBuilder) {
@@ -43,22 +42,11 @@ export class LoginComponent {
     return confirmPasswordControl?.value !== '' && passwordControl?.value !== confirmPasswordControl?.value;
   }
 
-  //para mostrar u ocultar el modal de login, ver si puedo mejorarlo
-  toggleModal() {
-    this.isModalOpen = !this.isModalOpen;
-    if(!this.isModalOpen) {
-      this.loginForm.reset();
-      this.formSubmitted = false;
-    }
-  }
-
   //para verificar que el password y confirmar password sean iguales en tiempo real
   passwordMatchValidator(formGroup: FormGroup) {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmPassword')?.value;
-
     return password === confirmPassword ? null : { passwordMismatch: true };
-
   }
 
   //para manejar las invalidaciones

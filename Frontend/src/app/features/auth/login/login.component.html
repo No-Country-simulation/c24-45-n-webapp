@@ -1,14 +1,17 @@
 
-<button class="px-4 py-2 bg-green-600 text-white rounded" (click)="toggleModal()">Login</button>
+<div class=" grid grid-cols-1 sm:grid-cols-2 bg-[#00765a] bg-opacity-50 min-h-screen">
 
+    <div  class="hidden bg-[#00765a] min-h-screen sm:flex flex-col justify-center items-center p-10">
+        <img src="/assets/LogoGiveHand1.svg" class="w-3xl h-3xl mr-5 lg:mr-10 mt-[-60px]" alt="Hola">
+        <h1 class="text-[38px] lg:text-[48px] pl-5 text-white mt-[-40px] lg:mt-[-80px] lg:w-full ">One more hand could change the world</h1>
+    </div>
 
-@if (isModalOpen) {
-    <div class="fixed inset-0 flex items-center justify-center bg-[rgba(0,118,90,.3)] rgba">
-        <div class="bg-white p-6 rounded-2xl shadow-lg w-[400px] relative">
-            
-            <button (click)="toggleModal()" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
-
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 px-10 py-5 w-auto pt-10">
+    <div class="sm:bg-white p-6 sm:p-10 flex flex-col justify-center items-center shadow-lg relative sm:rounded-l-[100px] lg:rounded-l-[250px]">
+        
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 border border-white p-[30px] lg:p-14 rounded-md
+            shadow-[0_8px_20px_rgba(0,0,0,0.3)]
+            hover:shadow-[0_12px_30px_rgba(0,0,0,0.4)]
+            transition-shadow duration-300 mt-10 bg-white">
                 <div>
                     <h1 class="text-4xl pb-5 font-semibold">Bienvenido</h1>
                     <h2 class="text-md">Ingresa tus datos para continuar</h2>
@@ -57,4 +60,3 @@
             </form>
         </div>
     </div>
-}
