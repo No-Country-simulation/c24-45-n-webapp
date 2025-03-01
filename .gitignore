@@ -3,7 +3,6 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-Backend/GivenHands/.env
 
 ### STS ###
 .apt_generated
@@ -32,4 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
