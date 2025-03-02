@@ -1,24 +1,38 @@
-<div class="flex h-screen gap-12 justify-center items-center">
-  <div class="">
-    <div class="flex flex-row gap-10 relative">
-      <div class="flex flex-col justify-evenly">
-        <div class="flex flex-col gap-4 items-start">
-          <div class="inline-block bg-white text-emerald-700 px-4 py-2 rounded-full font-medium">
+<div class="flex min-h-screen mt-32 md:mt-0 gap-12 justify-center items-center">
+    <div class="flex flex-col md:flex-row gap-10 relative items-center">
+      <div class="flex flex-col justify-evenly gap-6">
+        <div class="flex flex-col gap-6 items-start px-2 md:px-0">
+          <div class="text-5xl inline-block bg-white text-emerald-700 px-4 py-2 rounded-2xl font-medium">
             Welcome To
           </div>
-          <h1 class="text-white text-6xl font-bold leading-tight">
-            Give Hand
-          </h1>
-          <p class="text-emerald-100 text-xl">
-            Connect with hands to help and release hearts
-          </p>
+          <div class="bg-white rounded-2xl flex flex-row items-center px-5">
+            <img src="./images/logo.svg" class="w-36 h-36" alt="logo">
+            <h1 class="text-black text-7xl font-light leading-tight">
+              Give  <span class="text-emerald-700">Hand</span>
+            </h1>
+          </div>
+          <div class="w-full text-center">
+            <p class="text-white text-2xl font-semibold">
+              Whit more 500 ONG's around the world.
+              <br>
+              Connect with hands to help and release hearts
+            </p>
+          </div>
         </div>
-        <get-started-now-button [size]="SizeType.LARGE"/>
+        <div class="flex flex-col gap-3 items-center">
+          <span class="text-white text-2xl font-semibold">Start like</span>
+          <div class="flex flex-col md:flex-row gap-10">
+            <button class="text-2xl cursor-pointer px-12 rounded-2xl py-2 text-white font-bold bg-blue-400 hover:bg-blue-500 transition-all duration-300">Volunteer</button>
+            <button class="text-2xl cursor-pointer px-12 rounded-2xl py-2 text-black font-bold bg-white hover:bg-gray-300 transition-all duration-300">Organization</button>
+          </div>
+        </div>
       </div>
-      <div class="p-4 border-4 rounded-full border-emerald-800">
+      <div class="p-4 w-96 h-96 border-4 rounded-full border-emerald-800 relative">
+        <div class="absolute bottom-4 left-0">
+          <img src="./icons/world.png" class="w-32 h-32 rounded-full" alt="world">
+        </div>
         <img src="https://img.freepik.com/free-vector/stop-racism-illustration-concept_23-2148581679.jpg"
-          alt="hands image" class="w-80 h-80 rounded-full">
+          alt="hands image" class="w-full h-full rounded-full">
       </div>
     </div>
-  </div>
 </div>
