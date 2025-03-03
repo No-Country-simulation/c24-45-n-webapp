@@ -18,7 +18,7 @@
     "@angular/platform-browser": "^19.0.0",
     "@angular/platform-browser-dynamic": "^19.0.0",
     "@angular/router": "^19.0.0",
-    "@fontsource-variable/montserrat": "^5.1.1",
+    "@fontsource-variable/montserrat": "^5.2.5",
     "@tailwindcss/postcss": "^4.0.7",
     "postcss": "^8.5.3",
     "rxjs": "~7.8.0",

@@ -1,0 +1,61 @@
+<nav class="flex items-center justify-between bg-[#048c6b] p-4 shadow-md fixed w-full">
+  <div class="flex-1 mx-4">
+    <input
+      class="w-full max-w-md border bg-white border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      type="search"
+      placeholder="Buscar..."
+      [(ngModel)]="searchQuery"
+      (keyup)="search()"
+    >
+  </div>
+
+  <button 
+    class="relative p-2 rounded-full hover:bg-gray-200 transition"
+    (click)="clearNotifications()"
+    aria-label="Notificaciones"
+  >
+    <img src="icons/notification.svg" alt="Notificación" class="w-6 h-6">
+    @if (notificationsCount > 0) {
+      <span
+        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full"
+      >
+        {{ notificationsCount }}
+      </span>
+    }
+  </button>
+
+  <div class="relative ml-4">
+    <button 
+      (click)="toggleDropdown()" 
+      class="flex items-center space-x-2 p-2 rounded-full hover:bg-gray-200 transition"
+    >
+      <img 
+        [src]="userProfileImage" 
+        alt="Foto de perfil" 
+        class="w-10 h-10 rounded-full border border-gray-300"
+      >
+    </button>
+    @if (isDropdownOpen) {
+      <div class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg">
+        <ul class="py-2">
+          <li>
+            <a href="/perfil" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+              Perfil
+            </a>
+          </li>
+          <li>
+            <button 
+              (click)="logout()" 
+              class="w-full text-left block px-4 py-2 text-red-600 hover:bg-gray-100"
+            >
+              Cerrar sesión
+            </button>
+          </li>
+        </ul>
+      </div>
+    }
+  </div>
+</nav>
+
+
+

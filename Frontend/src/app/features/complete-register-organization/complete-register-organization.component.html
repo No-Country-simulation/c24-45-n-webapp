@@ -1,0 +1,147 @@
+<app-social-navbar></app-social-navbar>
+
+
+<section class="flex justify-center bg-[#e0f4ee] py-10 px-6 sm:px-10 lg:px-20 ">
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="w-full max-w-6xl bg-gray-100 p-10 rounded-lg shadow-lg flex flex-col gap-10 mt-12">
+    <div class="w-full text-center mb-6 md:mb-0">
+      <h1 class="text-3xl font-bold text-gray-800">Completa tu perfil para empezar esta experiencia</h1>
+      <h2 class="text-lg font-semibold text-gray-600">Organización</h2>
+      <h3 class="text-sm text-red-500">* Campos obligatorios</h3>
+    </div>
+    
+    <div class="grid grid-cols-1 md:flex flex-row gap-5 items-center">
+    <!-- Columna Izquierda -->
+    <div class="w-full md:w-1/2 space-y-6">
+      <div>
+        <label  class="block font-medium text-gray-700">Nombre de la organización *</label>
+        <input type="text" placeholder="Nombre de la organización" required formControlName="nombre"
+          class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        @if(isFieldInvalid('nombre')) {
+          <div class="text-red-500 text-sm mt-1">Nombre es obligatorio</div>
+        }
+      </div>
+      
+      <div>
+        <label class="block font-medium text-gray-700">Causa</label>
+        <input type="text" placeholder="Causa" formControlName="causa"
+          class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+      </div>
+      
+      <div>
+        <label class="block font-medium text-gray-700">Fecha de Fundación</label>
+        <input type="date" formControlName="fundacion"
+          class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+      </div>
+      
+      <div>
+        <label class="block font-medium text-gray-700">Descripción *</label>
+        <textarea placeholder="Descripción" rows="3" required formControlName="descripcion"
+          class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"></textarea>
+        @if(isFieldInvalid('descripcion')) {
+          <div class="text-red-500 text-sm mt-1">Descripción es obligatoria</div>
+        }
+      </div>
+      
+      <div>
+        <label class="block font-medium text-gray-700">Email *</label>
+        <input type="email" placeholder="Email" required formControlName="email"
+          class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        @if(isFieldInvalid('email')) {
+          <div class="text-red-500 text-sm mt-1">Email es obligatorio</div>
+        }
+      </div>
+      
+      <div>
+        <label class="block font-medium text-gray-700">Teléfono *</label>
+        <input type="text" placeholder="Agregue un teléfono" required formControlName="telefono"
+          class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        @if(isFieldInvalid('telefono')) {
+          <div class="text-red-500 text-sm mt-1">Teléfono es obligatorio</div>
+        }
+      </div>
+    </div>
+    
+    <!-- Columna Derecha -->
+    <div class="w-full md:w-1/2 space-y-4">
+      
+      <div>
+        <label class="block font-medium text-gray-700">País *</label>
+        <input type="text" placeholder="País" required formControlName="pais"
+          class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        @if(isFieldInvalid('pais')) {
+          <div class="text-red-500 text-sm mt-1">País es obligatorio</div>
+        }
+      </div>
+      
+      <div>
+        <label class="block font-medium text-gray-700">Provincia *</label>
+        <input type="text" placeholder="Provincia" required formControlName="provincia"
+          class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        @if(isFieldInvalid('provincia')) {
+          <div class="text-red-500 text-sm mt-1">Provincia es obligatoria</div>
+        }
+      </div>
+      
+      <div>
+        <label class="block font-medium text-gray-700">Ciudad *</label>
+        <input type="text" placeholder="Ciudad" required formControlName="ciudad"
+          class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        @if(isFieldInvalid('ciudad')) {
+          <div class="text-red-500 text-sm mt-1">Ciudad es obligatoria</div>
+        }
+      </div>
+      
+      <div>
+        <label class="block font-medium text-gray-700">Dirección *</label>
+        <input type="text" placeholder="Ingrese una dirección" required formControlName="direccion"
+          class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        @if(isFieldInvalid('direccion')) {
+          <div class="text-red-500 text-sm mt-1">Dirección es obligatoria</div>
+        }
+      </div>
+      
+      <div>
+        <label class="block font-medium text-gray-700">Código Postal *</label>
+        <input type="text" placeholder="Ingrese su código postal" required formControlName="zip"
+          class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        @if(isFieldInvalid('zip')) {
+          <div class="text-red-500 text-sm mt-1">Código Postal es obligatorio</div>
+        }
+      </div>
+      
+      <div>
+        <label class="block font-medium text-gray-700">Sitio Web *</label>
+        <input type="text" placeholder="Ingrese su sitio web" formControlName="website"
+          class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+          @if(isFieldInvalid('website')) {
+          <div class="text-red-500 text-sm mt-1">Sitio Web es obligatorio</div>
+          }
+      </div>
+      
+      <div>
+        <label class="block font-medium text-gray-700">Redes Sociales *</label>
+        <input type="text" placeholder="Ingrese sus redes sociales" formControlName="social"
+          class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none">
+          @if(isFieldInvalid('social')) {
+          <div class="text-red-500 text-sm mt-1">Redes Sociales es obligatorio</div>
+          }
+      </div>
+
+      
+    </div>
+    
+    </div>
+    <div class="flex flex-col items-center">
+        <label class="block font-medium text-gray-700">Imagen de perfil</label>
+        <input type="file" accept="image/*" formControlName="imagen" class="mt-2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none w-full md:w-auto">
+      </div>
+
+      <div class="flex justify-center">
+        <button type="submit"
+          class="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">
+          Guardar
+        </button>
+      </div>
+  </form>
+</section>
+
