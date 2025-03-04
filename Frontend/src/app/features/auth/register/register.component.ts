@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -84,9 +85,10 @@ export class RegisterComponent {
     } else {
       console.log('Formulario no válido');
     }
+
   }
 
-  // Lógica para el botón de volver
+  // Para volver a home
   goBack() {
     this.location.back();
   }
