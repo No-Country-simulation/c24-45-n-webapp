@@ -3,7 +3,6 @@ import { NavbarComponent } from '../../layout/navbar/navbar.component';
 import { StartNowComponent } from './components/start-now/start-now.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { CompaniesWorkingWithUsComponent } from './components/companies-working-with-us/companies-working-with-us.component';
-import { NgClass, NgIf } from '@angular/common';
 import { FooterComponent } from '../../layout/footer/footer.component';
 
 @Component({
