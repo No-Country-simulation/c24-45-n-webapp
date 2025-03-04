@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent {
   registerForm: FormGroup;
   formSubmitted = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private location: Location) {
     this.registerForm = this.fb.group(
       {
         name: ['', [Validators.required, Validators.minLength(3)]],
@@ -24,7 +25,6 @@ export class RegisterComponent {
       { validators: this.passwordMatchValidator }
     );
   }
-
 
   //con esto puedo validar y verificar que las contraseñas coincidan
   passwordMatchValidator(formGroup: FormGroup) {
@@ -84,5 +84,10 @@ export class RegisterComponent {
     } else {
       console.log('Formulario no válido');
     }
+  }
+
+  // Lógica para el botón de volver
+  goBack() {
+    this.location.back();
   }
 }
