@@ -8,7 +8,7 @@
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
@@ -32,8 +32,7 @@
               }
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/@fontsource-variable/montserrat/index.css"
+              "src/styles.css"
             ],
             "scripts": []
           },

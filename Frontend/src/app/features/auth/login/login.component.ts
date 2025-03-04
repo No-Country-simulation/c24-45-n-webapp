@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +13,11 @@ export class LoginComponent {
   passwordVisibility = false;
   formSubmitted = false;
 
-  constructor(private fb: FormBuilder, private location: Location) {
+  constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8)]],
+        password: ['', [Validators.required]],
         confirmPassword: ['', [Validators.required]]
       },
       { validators: this.passwordMatchValidator }
@@ -36,10 +35,10 @@ export class LoginComponent {
     const confirmPasswordControl = this.loginForm.get('confirmPassword');
     const passwordControl = this.loginForm.get('password');
 
-    if (!confirmPasswordControl || !passwordControl) {
+    if(!confirmPasswordControl || !passwordControl) {
       return false;
     }
-
+    
     return confirmPasswordControl?.value !== '' && passwordControl?.value !== confirmPasswordControl?.value;
   }
 
@@ -61,13 +60,8 @@ export class LoginComponent {
     this.formSubmitted = true;
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
-    } else {
+    }else{
       console.log('Form is invalid');
     }
-  }
-
-  // Es para volver a la pagina anterior
-  goBack() {
-    this.location.back();
   }
 }
