@@ -5,6 +5,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { LoginComponent } from './features/auth/login/login.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './features/home/home.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './features/auth/register/register.component';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -13,5 +15,8 @@ export const appConfig: ApplicationConfig = {
     LoginComponent,
     AppComponent,
     HomeComponent,
+    ReactiveFormsModule,
+    AppComponent,
+    RegisterComponent,
   ],
 };

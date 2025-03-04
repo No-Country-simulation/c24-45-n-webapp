@@ -1,0 +1,99 @@
+
+
+  <div class=" grid grid-cols-1 sm:grid-cols-2 bg-[#00765a] bg-opacity-50 min-h-screen">
+
+    <div  class="hidden bg-[#00765a] min-h-screen sm:flex flex-col justify-center items-center p-10">
+      <img src="/assets/LogoGiveHand1.svg" class="w-3xl h-3xl mr-5 lg:mr-10 mt-[-60px]" alt="Hola">
+      <h1 class="text-[38px] lg:text-[48px] pl-5 text-white mt-[-40px] lg:mt-[-80px] lg:w-full ">One more hand could change the world</h1>
+    </div>
+
+    
+    <div class=" sm:bg-white p-6 sm:p-10 flex flex-col justify-center items-center shadow-lg relative sm:rounded-l-[100px] lg:rounded-l-[250px] ">
+
+      <button (click)="goBack()" class="sm:hidden bg-green-500 text-white px-4 py-2 rounded absolute top-5 left-5">
+        Volver
+        </button>
+
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 border border-white p-[30px] lg:p-12 rounded-md sm:w-[350px] lg:w-[400px] lg:ml-[75px]  xl:w-[500px] xl:ml-[120px]
+      shadow-[0_8px_20px_rgba(0,0,0,0.3)]
+      hover:shadow-[0_12px_30px_rgba(0,0,0,0.4)]
+      transition-shadow duration-300 mt-10 bg-white">
+        <h1 class="text-[40px] text-[#00765a] text-center font-semibold">Regístrate</h1>
+        <p class="text-lg text-center mt-2 pb-2">Crea una cuenta para empezar a hacer tu voluntariado.</p>
+
+        <!-- Nombre de usuario -->
+        <div class="grid grid-cols-1 gap-5">
+          <div class="flex flex-col">
+            <input formControlName="name" type="text" class="border-b-2 border-gray-400 p-2 focus:outline-none focus:border-green-500 transition-all duration-300" placeholder="Nombre de usuario" required>
+            @if (isFieldValid('name')) {
+              <div class="text-red-500 text-sm">
+                @if (registerForm.get('name')?.hasError('required')) {
+                  El nombre es requerido.
+                }
+                @if (registerForm.get('name')?.hasError('minlength')) {
+                  El nombre debe tener al menos 3 caracteres.
+                }
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="flex flex-col">
+          <input formControlName="email" type="email" class="border-b-2 border-gray-400 p-2 focus:outline-none focus:border-green-500 transition-all duration-300" placeholder="Correo Electrónico" required>
+          @if (isEmailInvalid()) {
+            <div class="text-red-500 text-sm">
+              @if (registerForm.get('email')?.hasError('required')) {
+                El correo electrónico es requerido.
+              }
+              @if (registerForm.get('email')?.hasError('email')) {
+                Debe ingresar un correo válido.
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Contraseña -->
+        <div class="flex flex-col">
+          <input formControlName="password" type="password" class="border-b-2 border-gray-400 p-2 focus:outline-none focus:border-green-500 transition-all duration-300" placeholder="Contraseña" required>
+          @if (isFieldValid('password')) {
+            <div class="text-red-500 text-sm">
+              @if (registerForm.get('password')?.hasError('required')) {
+                La contraseña es requerida.
+              }
+              @if (registerForm.get('password')?.hasError('minlength')) {
+                La contraseña debe tener al menos 8 caracteres.
+              }
+            </div>
+          }
+        </div>
+        
+
+        <!-- Confirmar Contraseña -->
+        <div class="flex flex-col">
+          <input formControlName="confirmPassword" type="password" class="border-b-2 border-gray-400 p-2 focus:outline-none focus:border-green-500 transition-all duration-300" placeholder="Confirmar Contraseña" required>
+          @if (isConfirmPasswordInvalid()) {
+            <div class="text-red-500 text-sm">
+              @if (registerForm.get('confirmPassword')?.hasError('required')) {
+                Debe confirmar la contraseña.
+              }
+              @if (registerForm.hasError('passwordMismatch')) {
+                Las contraseñas no coinciden.
+              }
+            </div>
+          }
+        </div>
+
+        <p class="text-md text-gray-700">¿Ya tienes una cuenta? <a href="/login" class="text-blue-600 inline ml-2 text-md font-semibold">Inicia sesión</a></p>
+        <button type="submit"
+        class="cursor-pointer relative group overflow-hidden border-2 px-10 py-3 border-green-500 rounded-lg mt-5">
+        <span class="font-bold text-white text-xl relative z-10 group-hover:text-green-500 duration-500">Registrarse</span>
+        <span class="absolute top-0 left-0 w-full bg-green-500 duration-500 group-hover:-translate-x-full h-full"></span>
+        <span class="absolute top-0 left-0 w-full bg-green-500 duration-500 group-hover:translate-x-full h-full"></span>
+        <span class="absolute top-0 left-0 w-full bg-green-500 duration-500 delay-300 group-hover:-translate-y-full h-full"></span>
+        <span class="absolute delay-300 top-0 left-0 w-full bg-green-500 duration-500 group-hover:translate-y-full h-full"></span>
+    </button>
+      </form>
+    </div>
+  </div>

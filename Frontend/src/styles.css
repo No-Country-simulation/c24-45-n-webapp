@@ -1,1 +1,10 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+:root{
+  --montserrat: 'Montserrat Variable', sans-serif;
+}
+body{
+  min-height: 100vh;
+  font-family: 'Montserrat Variable', sans-serif;
+}

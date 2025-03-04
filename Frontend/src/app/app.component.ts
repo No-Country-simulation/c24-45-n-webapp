@@ -13,11 +13,15 @@ import { HomeComponent } from "./features/home/home.component";
 export class AppComponent {
   title = 'Frontend';
 
-  constructor(private router : Router) {
-    console.log('AppComponent constructor');
+  constructor(private router: Router) {
+    console.log('App component created');
   }
 
-  login(ruta : string) {
+  Login(ruta : string) {
+    this.router.navigate(["/" + ruta]);
+  }
+
+  Register(ruta : string) {
     this.router.navigate(["/" + ruta]);
   }
 }
