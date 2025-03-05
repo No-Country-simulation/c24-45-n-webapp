@@ -1,25 +1,36 @@
 package com.no_country.GivenHands.service;
 
-import com.no_country.GivenHands.dto.RegisterUserDto;
+import com.no_country.GivenHands.dto.RegisterVolunteerDTO;
 import com.no_country.GivenHands.model.RegisterUser;
+import com.no_country.GivenHands.model.Volunteer;
 import com.no_country.GivenHands.model.enumeration.Rol;
 import com.no_country.GivenHands.repository.RegisterUserRepository;
+import com.no_country.GivenHands.repository.VolunteerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegisterUserService {
+public class RegisterVolunteerService {
         @Autowired
         private RegisterUserRepository registerUserRepository;
 
-    public void regitrarUsuario(RegisterUserDto registerUserDto) throws IllegalArgumentException {
-        validationRegisterUser(registerUserDto.userName(), registerUserDto.email(), registerUserDto.password(), registerUserDto.password2());
+        @Autowired
+        private VolunteerRepository volunteerRepository;
+
+    public void regiterUserVolunteer(RegisterVolunteerDTO registerVolunteerDTO) throws IllegalArgumentException {
+        validationRegisterUser(registerVolunteerDTO.userName(), registerVolunteerDTO.email(), registerVolunteerDTO.password(), registerVolunteerDTO.password2());
         RegisterUser newRegisterUser=new RegisterUser();
-        newRegisterUser.setUserName(registerUserDto.userName());
-        newRegisterUser.setEmail(registerUserDto.email());
-        newRegisterUser.setPassword(registerUserDto.password());
+        newRegisterUser.setUserName(registerVolunteerDTO.userName());
+        newRegisterUser.setEmail(registerVolunteerDTO.email());
+        newRegisterUser.setPassword(registerVolunteerDTO.password());
         newRegisterUser.setRol(Rol.VOLUNTEER);
         registerUserRepository.save(newRegisterUser);
+
+        Volunteer volunteer = new Volunteer();
+        volunteer.setRegisterUser(newRegisterUser);
+        volunteerRepository.save(volunteer);
+
+
     }
     public void validationRegisterUser(String userName, String email, String password, String password2)throws IllegalArgumentException{
         if (userName == null || userName.isEmpty()) {
