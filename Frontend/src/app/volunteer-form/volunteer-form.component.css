@@ -1,0 +1,156 @@
+body {
+  background-color: #e0f4ee; /* Cambia el fondo del body a verde claro */
+}
+
+.tipoform{
+  text-align: start;
+  color: #00765a;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.sub-campos{
+  text-align: start;
+  color: #000000;
+  font-size: 17px;
+}
+.introform{
+  font-weight: bold;
+  text-align: center;
+  font-size: 20px
+}
+.formulario-perfil {
+  max-width: 72%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white; /* Asegura que el fondo del formulario sea blanco */
+  border-radius: 5px;
+}
+
+.contenedor-columnas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.columna-derecha {
+  align-items: center; /* Centra la columna derecha dentro de su celda Grid */
+  display: flex; /* Opcional: si quieres centrar el contenido dentro de la columna */
+  flex-direction: column; /* Opcional: si quieres centrar el contenido dentro de la columna */
+}
+
+.formulario-perfil label {
+  display: inline-block;
+  width: 150px;
+  margin-right: 10px; 
+  margin-bottom: 5px;
+}
+
+.formulario-perfil input[type="text"],
+.formulario-perfil input[type="date"],
+.formulario-perfil input[type="tel"],
+.formulario-perfil select,
+.formulario-perfil textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+}
+
+.formulario-perfil textarea {
+  height: 100px;
+}
+
+.formulario-perfil .guardar {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.formulario-perfil .avatar {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.formulario-perfil .avatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  cursor: pointer;
+}
+
+.formulario-perfil .informacion-no-publica {
+  background-color: white; /* Asegura que el fondo de esta sección sea blanco */
+  padding: 10px;
+  width: 75%;
+  margin-bottom: 10px;
+  border-radius: 20px;
+  border: 0.5px solid #000000;
+  align-items: center; /* Alinea verticalmente los elementos */
+   text-align: center;
+}
+
+.campos-obligatorios {
+  display: grid;
+  grid-template-columns: 100px 1fr; /* 150px para el rótulo, el resto para el input */
+  gap: 18px; /* Espacio entre filas y columnas */
+  align-items: start; /* Alinea verticalmente los elementos */
+  font-size: 16px;
+}
+
+
+.informacion-no-publica h1{
+ font-weight: bold;
+  align-items: center;
+}
+
+.info-novisible{
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+.informacion-no-publica label {
+  text-align: start;
+  padding-right: 5px;
+  font-size: 17px;
+}
+
+.informacion-no-publica input,
+.informacion-no-publica input[class="nopublic_input"] {
+  width: 95%;
+}
+
+
+.contenedor-guardar{
+  /*position: fixed; Posición fija respecto a la ventana del navegador */
+  align-items: end;
+  justify-items: end;
+  /*bottom: 10px;  Ajusta la distancia desde la parte inferior */
+  /* right: 20px; Ajusta la distancia desde la derecha */
+  /* z-index: 500px; Asegura que el botón esté sobre otros elementos */ 
+}
+.campo-no-publico {
+  display: grid;
+  grid-template-columns: 150px 1fr; /* Ajusta el ancho según sea necesario */
+  gap: 10px;
+  align-items: center;
+}
+
+.campo-no-publico label {
+  text-align: right;
+  padding-right: 5px;
+}
+
+.campo-no-publico input, .campo-no-publico input[type="tel"] {
+  width: 100%;
+}
+
+.required {
+  color: red;
+}
