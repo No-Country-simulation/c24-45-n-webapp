@@ -58,7 +58,7 @@
 
         <!-- Contenedor para la imagen de perfil -->
         <div class="flex justify-center md:justify-end md:pr-5 md:mr-20 xl:mr-[200px] 2xl:mr-[240px] ">
-          <div class="relative w-32 h-32 rounded-full overflow-hidden border-2 border-gray-300">
+          <div class="relative w-32 h-32 rounded-full overflow-hidden border-4 border-gray-300">
             <img [src]="profileImage" alt="Profile Image" class="w-full h-full object-cover">
             <input type="file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*" (change)="onFileSelected($event)">
           </div>

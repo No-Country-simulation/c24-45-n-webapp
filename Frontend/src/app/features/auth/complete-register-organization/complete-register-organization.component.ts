@@ -9,7 +9,7 @@ import { MainNavbarComponent } from "../../main/layout/main-navbar/main-navbar.c
   imports: [MainNavbarComponent]
 })
 export class CompleteRegisterOrganizationComponent {
-  profileImage: string = 'https://via.placeholder.com/150';
+  profileImage: string = 'assets/default-profile-organization.svg';
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
