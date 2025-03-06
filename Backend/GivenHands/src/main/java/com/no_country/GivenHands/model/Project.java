@@ -5,7 +5,10 @@ import com.no_country.GivenHands.model.enumeration.Skill;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
+
 @Entity
 @Table(name = "projects")
 public class Project {
@@ -26,9 +29,9 @@ public class Project {
 
         private boolean status;
 
-        private LocalDateTime startDate;
+        private LocalDate startDate;
 
-        private LocalDateTime endDate;
+        private LocalDate endDate;
 
         @Enumerated(EnumType.STRING)
         private Skill skillsRequired;
@@ -37,11 +40,15 @@ public class Project {
         @JoinColumn(name = "organization_id")
         private Organization organization;
 
-        @ManyToOne
-        @JoinColumn(name = "users_id")
-        private User user;
+        @ManyToMany
+        @JoinTable(
+                name = "project_volunteer",
+                joinColumns = @JoinColumn(name = "project_id"),
+                inverseJoinColumns = @JoinColumn(name = "volunteer_id")
+        )
+        private Set<Volunteer> volunteers;
 
-        public Project(Long id, String name, String description, String location, Activity typeOfActivity, boolean status, LocalDateTime startDate, LocalDateTime endDate, Skill skillsRequired, Organization organization, User user) {
+        public Project(Long id, String name, String description, String location, Activity typeOfActivity, boolean status, LocalDate startDate, LocalDate endDate, Skill skillsRequired, Organization organization, Set<Volunteer> volunteers) {
                 this.id = id;
                 this.name = name;
                 this.description = description;
@@ -52,7 +59,7 @@ public class Project {
                 this.endDate = endDate;
                 this.skillsRequired = skillsRequired;
                 this.organization = organization;
-                this.user = user;
+                this.volunteers = volunteers;
         }
 
         public Project() {
@@ -106,19 +113,19 @@ public class Project {
                 this.status = status;
         }
 
-        public LocalDateTime getStartDate() {
+        public LocalDate getStartDate() {
                 return startDate;
         }
 
-        public void setStartDate(LocalDateTime startDate) {
+        public void setStartDate(LocalDate startDate) {
                 this.startDate = startDate;
         }
 
-        public LocalDateTime getEndDate() {
+        public LocalDate getEndDate() {
                 return endDate;
         }
 
-        public void setEndDate(LocalDateTime endDate) {
+        public void setEndDate(LocalDate endDate) {
                 this.endDate = endDate;
         }
 
@@ -138,11 +145,11 @@ public class Project {
                 this.organization = organization;
         }
 
-        public User getUser() {
-                return user;
+        public Set<Volunteer> getVolunteers() {
+                return volunteers;
         }
 
-        public void setUser(User user) {
-                this.user = user;
+        public void setVolunteers(Set<Volunteer> volunteers) {
+                this.volunteers = volunteers;
         }
 }
