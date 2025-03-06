@@ -1,5 +1,7 @@
 package com.no_country.GivenHands.controller;
 
+import com.no_country.GivenHands.dto.ProjectDTO;
+import com.no_country.GivenHands.exception.MiException;
 import com.no_country.GivenHands.model.Project;
 import com.no_country.GivenHands.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +10,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
     @Autowired
     private ProjectService projectService;
+
     @PostMapping("/register")
-    public ResponseEntity crearProject(@RequestBody Project project) {
-        projectService.createProject(project);
+    public ResponseEntity crearProject(@RequestBody ProjectDTO projectDTO) {
+        projectService.createProject(projectDTO);
         return ResponseEntity.ok("Proyecto Creado!!");
     }
+
+    @PostMapping("/{projectId}/volunteers/{volunteerId}")
+    public ResponseEntity<Object> addVolunteerToProject(@PathVariable Long projectId, @PathVariable Long volunteerId){
+        try {
+            projectService.addVolunteerToProject(projectId, volunteerId);
+            return new ResponseEntity<>("Voluntario agregado correctamente!",HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
 //    getAllProjects: Recupera y devuelve todos los proyectos.
     @GetMapping
     public ResponseEntity<List<Project>> getAllProjects() {
