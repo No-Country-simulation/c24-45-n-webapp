@@ -20,6 +20,7 @@
     "@angular/router": "^19.0.0",
     "@fontsource-variable/montserrat": "^5.2.5",
     "@tailwindcss/postcss": "^4.0.7",
+    "jwt-decode": "^4.0.0",
     "postcss": "^8.5.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
