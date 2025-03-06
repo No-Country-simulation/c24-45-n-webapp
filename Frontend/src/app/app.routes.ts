@@ -25,4 +25,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/auth/complete-register-organization/complete-register-organization.component').then((c) => c.CompleteRegisterOrganizationComponent),
   },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./features/main/main.routes').then((r) => r.routes),
+  },
 ];
