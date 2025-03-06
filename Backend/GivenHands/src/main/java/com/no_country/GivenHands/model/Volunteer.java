@@ -3,6 +3,8 @@ package com.no_country.GivenHands.model;
 import com.no_country.GivenHands.model.enumeration.Skill;
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "Volunteer")
 public class Volunteer {
@@ -33,7 +35,10 @@ public class Volunteer {
     @Enumerated(EnumType.STRING)
     private Skill skills;
 
-    public Volunteer(Long id, RegisterUser registerUser, String name, String lastname, int age, int phone, String location, Address address, String disponibilidad, Skill skills) {
+    @ManyToMany(mappedBy = "volunteers")
+    private Set<Project> projects;
+
+    public Volunteer(Long id, RegisterUser registerUser, String name, String lastname, int age, int phone, String location, Address address, String disponibilidad, Skill skills, Set<Project> projects) {
         this.id = id;
         this.registerUser = registerUser;
         this.name = name;
@@ -44,6 +49,7 @@ public class Volunteer {
         this.address = address;
         this.disponibilidad = disponibilidad;
         this.skills = skills;
+        this.projects = projects;
     }
 
     public Volunteer() {
@@ -127,5 +133,13 @@ public class Volunteer {
 
     public void setSkills(Skill skills) {
         this.skills = skills;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 }
