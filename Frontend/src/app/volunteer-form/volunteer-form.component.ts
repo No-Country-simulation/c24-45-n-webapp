@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MainNavbarComponent } from '../features/main/layout/main-navbar/main-navbar.component';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-volunteer-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MainNavbarComponent],
   templateUrl: './volunteer-form.component.html',
   styleUrl: './volunteer-form.component.css'
 })

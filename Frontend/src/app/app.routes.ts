@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { RegisterComponent } from './features/auth/register/register.component';
 
 export const routes: Routes = [
   {
@@ -8,6 +7,9 @@ export const routes: Routes = [
       import('./features/home/home.component').then((c) => c.HomeComponent),
     pathMatch: 'full',
   },
+ // {
+ //   path: '', loadChildren: () => import('./features/main/main.routes').then(r => r.routes)
+ // },
     {
       path: 'register',
       loadComponent: () =>
@@ -32,6 +34,6 @@ export const routes: Routes = [
       path: 'muro',
       loadComponent: () =>
         import('./muro/muro.component').then((c) => c.MuroComponent),
-    }
+    },
 
 ];
