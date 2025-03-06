@@ -22,7 +22,7 @@
     </button>
     <ul class="px-10 py-5 gap-5 absolute top-18 right-8 bg-emerald-600 min-w-72 text-white rounded-3xl transition-all duration-300 transform origin-top"
         [ngClass]="{'hidden scale-95 opacity-0 pointer-events-none': isToggled, 'flex flex-col scale-100 opacity-100': !isToggled}">
-      <li class="text-2xl text-center">user</li>
+      <li class="text-2xl text-center">{{user().split('@')[0]}}</li>
       <hr>
       <li class="text-2xl w-auto px-2 py-1 cursor-pointer hover:bg-gray-200 hover:text-black rounded-2xl text-center transition-all duration-200"><a >Profile</a></li>
       <li class="text-2xl w-auto px-2 py-1 cursor-pointer hover:bg-gray-200 hover:text-black rounded-2xl text-center transition-all duration-200"><a >Log out</a></li>
