@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -8,7 +9,9 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: '', loadChildren: () => import('./features/main/main.routes').then(r => r.routes)
+    path: '',
+    loadChildren: () => import('./features/main/main.routes').then(r => r.routes),
+    canActivate: [authGuard]
   },
   {
     path: 'register',
@@ -24,5 +27,11 @@ export const routes: Routes = [
     path: 'complete-register-organization',
     loadComponent: () =>
       import('./features/auth/complete-register-organization/complete-register-organization.component').then((c) => c.CompleteRegisterOrganizationComponent),
+    canActivate:[authGuard]
   },
+  {
+    path: '**',
+    redirectTo:'home',
+    pathMatch:'full'
+  }
 ];
