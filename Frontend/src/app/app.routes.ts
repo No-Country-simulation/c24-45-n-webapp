@@ -22,5 +22,16 @@ export const routes: Routes = [
       path: 'complete-register-organization',
       loadComponent: () =>
         import('./features/auth/complete-register-organization/complete-register-organization.component').then((c) => c.CompleteRegisterOrganizationComponent),
+    },
+    {
+      path: 'volunteer-form',
+      loadComponent: () =>
+        import('./volunteer-form/volunteer-form.component').then((c) => c.VolunteerFormComponent),
+    },
+    {
+      path: 'muro',
+      loadComponent: () =>
+        import('./muro/muro.component').then((c) => c.MuroComponent),
     }
+
 ];

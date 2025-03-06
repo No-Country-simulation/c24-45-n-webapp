@@ -1,1 +1,76 @@
-<p>muro works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header class="px-4 w-full flex flex-row justify-between items-center bg-white">
+        <div class="flex flex-row items-center">
+          <img src="./images/logo.svg" class="w-24" alt="logo-image">
+          <h1 class="text-4xl">Give <span class="text-emerald-800">Hands</span></h1>
+        </div>
+        <form class="flex flex-row items-center justify-center border-2 w-20 md:w-96 border-gray-500 rounded-3xl overflow-hidden">
+          <img src="./icons/search.svg" class="w-12" alt="search-ico">
+          <input type="text" class="outline-0 placeholder:text-2xl w-full" placeholder="Search">
+        </form>
+        <div class="hidden md:flex flex-row gap-3">
+          <a href="#" class="flex flex-col items-center">
+            <img src="./icons/network.svg" class="w-12" alt="network-ico">
+            <span>Networks</span>
+          </a>
+          <a href="#" class="flex flex-col items-center">
+            <img src="./icons/bell.svg" class="w-12" alt="bell-ico">
+            <span>Notifications</span>
+          </a>
+          <button class="w-14 h-14 bg-blue-400 cursor-pointer hover:bg-blue-300 transition-all duration-200 rounded-full relative flex justify-center items-center">
+            <span class="text-3xl">G</span>
+            <img src="./icons/arrow-down.svg" class="w-5 absolute bottom-0 right-1" alt="arrow-down-ico">
+          </button>
+        </div>
+      </header>
+
+      <div class="flex h-screen bg-gray-100">
+        <aside class="w-1/4 p-4 bg-white shadow-md">
+          <div class="flex flex-col items-center">
+            <img src="./assets/avatar.jpg" alt="Avatar" class="w-32 h-32 rounded-full mb-4">
+            <h2 class="text-xl font-semibold">Génesis Baquerizo</h2>
+            <p class="text-gray-600">Voluntaria Ambiental</p>
+            <p class="text-sm text-gray-500">Ecuador, Guayaquil</p>
+          </div>
+          <div class="mt-6">
+            <h3 class="text-lg font-semibold mb-2">Proyectos</h3>
+            <p class="text-sm text-gray-700">ONU ha publicado un nuevo proyecto</p>
+            <p class="text-xs text-gray-500">Hace 12 horas</p>
+          </div>
+        </aside>
+      
+        <main class="flex-1 p-4">
+          <div class="bg-white rounded-lg shadow-md p-4 mb-4">
+            <textarea placeholder="Start a post" class="w-full border p-2 mb-2"></textarea>
+            <div class="flex justify-between">
+              <div>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Media</button>
+                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2">Event</button>
+              </div>
+              <button class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">VOLUNTEER</button>
+            </div>
+          </div>
+      
+          <div class="bg-white rounded-lg shadow-md p-4">
+            <div class="border-b pb-4 mb-4">
+              <div class="flex items-start mb-2">
+                <img src="./assets/avatar.jpg" alt="Avatar" class="w-10 h-10 rounded-full mr-2">
+                <div>
+                  <h3 class="font-semibold">Proyecto ONU</h3>
+                  <p class="text-xs text-gray-500">Hace 12 horas</p>
+                </div>
+              </div>
+              <p>Contenido de la publicación...</p>
+            </div>
+            </div>
+        </main>
+      </div>
+</body>
+</html>

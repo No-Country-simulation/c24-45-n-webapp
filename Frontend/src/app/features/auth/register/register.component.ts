@@ -98,8 +98,9 @@ export class RegisterComponent implements OnInit {
         // con esto puedo redirigir a complete-register-organization al registrarme
         this.router.navigate(['/complete-register-organization']);
       } else {
-        this.registerForm.reset();
-        this.formSubmitted = false;
+        //this.registerForm.reset();
+        //this.formSubmitted = false;
+        this.router.navigate(['/volunteer-form']);
       }
     } else {
       console.log('Formulario no válido');

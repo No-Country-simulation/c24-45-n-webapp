@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-volunteer-form',
@@ -13,7 +14,7 @@ export class VolunteerFormComponent implements OnInit {
   avatarPreview: string | ArrayBuffer | null = null;
   defaultAvatar = './assets/avatar.jpg';
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   onFileChange(event: any) {
     const file = event.target.files[0];
@@ -47,5 +48,8 @@ export class VolunteerFormComponent implements OnInit {
     if (this.miFormulario.valid) {
       console.log(this.miFormulario.value);
     }
+  }
+  irMuro() {
+    this.router.navigate(['/muro']);
   }
 }
