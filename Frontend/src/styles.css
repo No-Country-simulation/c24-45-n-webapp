@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+:root{
+  --montserrat: 'Montserrat Variable', sans-serif;
+}
+body{
+  min-height: 100vh;
+  font-family: 'Montserrat Variable', sans-serif;
+}

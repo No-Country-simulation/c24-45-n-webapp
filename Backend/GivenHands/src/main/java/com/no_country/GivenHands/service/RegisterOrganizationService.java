@@ -7,12 +7,16 @@ import com.no_country.GivenHands.model.RegisterUser;
 import com.no_country.GivenHands.model.enumeration.Cause;
 import com.no_country.GivenHands.model.enumeration.Rol;
 import com.no_country.GivenHands.repository.OrganizationRepository;
+import com.no_country.GivenHands.repository.RegisterUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RegisterOrganizationService {
+
+    @Autowired
+    private RegisterUserRepository registerUserRepository;
 
     @Autowired
     private OrganizationRepository organizationRepository;
@@ -22,19 +26,26 @@ public class RegisterOrganizationService {
         validationRegisterOrganization(registerOrganizationDto.userName(), registerOrganizationDto.email(),
                 registerOrganizationDto.password(), registerOrganizationDto.password2(), registerOrganizationDto.name(),
                 registerOrganizationDto.description());
-        Organization newOrganization =new Organization();
-        newOrganization.setUsername(registerOrganizationDto.userName());
-        newOrganization.setEmail(registerOrganizationDto.email());
-        newOrganization.setPassword(registerOrganizationDto.password());
-        newOrganization.setName(registerOrganizationDto.name());
-        newOrganization.setDescription(registerOrganizationDto.description());
-        newOrganization.setCause(registerOrganizationDto.cause());
-        newOrganization.setAddress(registerOrganizationDto.address());
-        newOrganization.setPhone(registerOrganizationDto.phone());
-        newOrganization.setWebSite(registerOrganizationDto.webSite());
-        newOrganization.setSocialMedia(registerOrganizationDto.socialMedia());
-        newOrganization.setRol(Rol.ORGANIZATION);
-        organizationRepository.save(newOrganization);
+
+        RegisterUser newRegisterUser = new RegisterUser();
+        newRegisterUser.setUserName(registerOrganizationDto.userName());
+        newRegisterUser.setEmail(registerOrganizationDto.email());
+        newRegisterUser.setPassword(registerOrganizationDto.password());
+        newRegisterUser.setRol(Rol.ORGANIZATION);
+        registerUserRepository.save(newRegisterUser);
+
+        Organization organization = new Organization();
+
+        organization.setName(registerOrganizationDto.name());
+        organization.setDescription(registerOrganizationDto.description());
+        organization.setCause(registerOrganizationDto.cause());
+        organization.setAddress(registerOrganizationDto.address());
+        organization.setPhone(registerOrganizationDto.phone());
+        organization.setWebSite(registerOrganizationDto.webSite());
+        organization.setSocialMedia(registerOrganizationDto.socialMedia());
+        organization.setRegisterUser(newRegisterUser);
+
+        organizationRepository.save(organization);
     }
     public void validationRegisterOrganization(String userName, String email, String password, String password2,
                                                String name, String description)throws IllegalArgumentException{

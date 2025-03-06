@@ -1,6 +1,6 @@
 package com.no_country.GivenHands.dto;
 
-public record RegisterUserDto(
+public record RegisterVolunteerDTO(
          String userName,
          String email,
          String password,

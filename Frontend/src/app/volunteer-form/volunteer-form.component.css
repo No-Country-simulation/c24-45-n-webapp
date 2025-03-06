@@ -24,7 +24,7 @@ body {
   margin: 0 auto;
   padding: 20px;
   background-color: white; /* Asegura que el fondo del formulario sea blanco */
-  border-radius: 5px;
+  border-radius: 25px;
 }
 
 .contenedor-columnas {
@@ -73,12 +73,14 @@ body {
 
 .formulario-perfil .avatar {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .formulario-perfil .avatar img {
-  width: 100px;
-  height: 100px;
+  display: block; /* Elimina el espacio extra debajo de la imagen */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   border: 2px solid #ccc;
   cursor: pointer;
@@ -129,8 +131,10 @@ body {
 
 .contenedor-guardar{
   /*position: fixed; Posición fija respecto a la ventana del navegador */
-  align-items: end;
-  justify-items: end;
+  display: flex; /* Habilita flexbox para el contenedor del formulario */
+  flex-direction: column; /* Organiza los elementos en columna */
+  align-items: flex-end; 
+  margin-right: 60px; 
   /*bottom: 10px;  Ajusta la distancia desde la parte inferior */
   /* right: 20px; Ajusta la distancia desde la derecha */
   /* z-index: 500px; Asegura que el botón esté sobre otros elementos */ 

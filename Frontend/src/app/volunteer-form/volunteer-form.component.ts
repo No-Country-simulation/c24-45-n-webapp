@@ -10,10 +10,24 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 })
 export class VolunteerFormComponent implements OnInit {
   miFormulario!: FormGroup; // Define miFormulario
+  avatarPreview: string | ArrayBuffer | null = null;
+  defaultAvatar = './assets/avatar.jpg';
 
   constructor(private fb: FormBuilder) {}
 
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.avatarPreview = e.target?.result || null;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   ngOnInit() {
+    this.avatarPreview = this.defaultAvatar;
     this.miFormulario = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],

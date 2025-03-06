@@ -10,5 +10,5 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Frontend';
+  title = 'Share your help';
 }
