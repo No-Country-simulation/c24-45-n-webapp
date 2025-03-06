@@ -1,22 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { RouterLink } from '@angular/router';
-
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   formSubmitted = false;
+  userType: string | null = null;
 
-  constructor(private fb: FormBuilder, private location: Location) {
+  constructor(
+    private fb: FormBuilder,
+    private location: Location,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.registerForm = this.fb.group(
       {
         name: ['', [Validators.required, Validators.minLength(3)]],
@@ -28,11 +33,16 @@ export class RegisterComponent {
     );
   }
 
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.userType = params['type'] || null;
+    });
+  }
+
   //con esto puedo validar y verificar que las contraseñas coincidan
   passwordMatchValidator(formGroup: FormGroup) {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmPassword')?.value;
-
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
@@ -81,12 +91,19 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       const userData = this.registerForm.value;
       console.log('Formulario de registro:', userData);
-      this.registerForm.reset();
-      this.formSubmitted = false;
+
+      if (this.userType === 'organization') {
+        //espacio para la logica de envio a la base de datos
+
+        // con esto puedo redirigir a complete-register-organization al registrarme
+        this.router.navigate(['/complete-register-organization']);
+      } else {
+        this.registerForm.reset();
+        this.formSubmitted = false;
+      }
     } else {
       console.log('Formulario no válido');
     }
-
   }
 
   // Para volver a home
