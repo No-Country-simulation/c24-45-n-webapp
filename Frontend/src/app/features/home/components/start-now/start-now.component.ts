@@ -8,12 +8,10 @@ import { Router } from '@angular/router';
   styleUrl: './start-now.component.css',
 })
 export class StartNowComponent {
+  constructor(private router: Router) {}
 
-  constructor(private Router: Router) {}
-
-  onRegister(){
-    this.Router.navigate(['/register']);
+  onRegister(type: string) {
+    this.router.navigate(['/register'], { queryParams: { type } });
   }
-
   }
 
