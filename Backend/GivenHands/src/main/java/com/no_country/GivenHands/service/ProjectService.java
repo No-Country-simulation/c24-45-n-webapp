@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectService {
@@ -58,11 +59,11 @@ public class ProjectService {
 
     }
 
-    public List<Project> getAllProjects() {
-        return projectRepository.findAll();//recupera todos los proyectos
+    public List<ProjectDTO> getAllProjects() {
+        return projectRepository.findAll().stream().map(ProjectDTO::new).collect(Collectors.toList());
     }
-    public Project getProjectById(Long id) {
-        return projectRepository.findById(id).orElse(null);
+    public Optional<ProjectDTO> getProjectById(Long id) {
+        return projectRepository.findById(id).map(ProjectDTO::new);
     }
 
     public Project updateProject(Long id, Project projectDetails) {
@@ -90,4 +91,7 @@ public class ProjectService {
         }
     }
 
-}
+    public List<ProjectDTO> searchProjects(String name, String location, String type, Boolean status) {
+            return projectRepository.searchProjects(name, location, type, status);
+        }
+    }
