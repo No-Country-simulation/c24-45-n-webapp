@@ -1,6 +1,7 @@
 package com.no_country.GivenHands.service;
 
 import com.no_country.GivenHands.dto.RegisterVolunteerDTO;
+import com.no_country.GivenHands.dto.UserDTO;
 import com.no_country.GivenHands.model.RegisterUser;
 import com.no_country.GivenHands.model.Volunteer;
 import com.no_country.GivenHands.model.enumeration.Rol;
@@ -8,6 +9,9 @@ import com.no_country.GivenHands.repository.RegisterUserRepository;
 import com.no_country.GivenHands.repository.VolunteerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class RegisterVolunteerService {
@@ -45,6 +49,21 @@ public class RegisterVolunteerService {
         if (!password.equals(password2)) {
             throw new IllegalArgumentException("Las contraseñas no coinciden.");
         }
+    }
+
+    public Map<String, String> getUserVolunteerById(Long id) {
+        RegisterUser registerUser = registerUserRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Usuario no encontrado"));
+
+        UserDTO userDTO = new UserDTO(registerUser.getUserName(),
+                registerUser.getEmail(), registerUser.getRol());
+
+        Map<String, String> response = new HashMap<>();
+        response.put("userName", userDTO.userName());
+        response.put("email", userDTO.email());
+        response.put("rol", userDTO.rol().toString());
+
+        return response;
     }
 
 }

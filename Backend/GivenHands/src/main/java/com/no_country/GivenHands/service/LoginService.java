@@ -23,7 +23,7 @@ public class LoginService {
         if(!(loginDTO.password().equals(registerUser.getPassword()) )){
             throw new MiException("Credenciales incorrectas");
         }
-        return jwtUtil.generateToken(registerUser.getEmail());
+        return jwtUtil.generateToken(registerUser.getId());
     }
 
 }

@@ -23,5 +23,15 @@ public class RegisterVolunteerController {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<Object> getUserOrganizationById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(registerVolunteerService.getUserVolunteerById(id));
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+    }
 }
 
