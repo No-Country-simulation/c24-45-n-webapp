@@ -9,7 +9,8 @@ public record OrganizationDTO(
         Cause cause,
         int phone,
         String webSite,
-        String socialMedia
+        String socialMedia,
+        Long userOrganizationId
 ) {
 
 
@@ -19,7 +20,8 @@ public record OrganizationDTO(
         organization.getCause(),
         organization.getPhone(),
         organization.getWebSite(),
-        organization.getSocialMedia());
+        organization.getSocialMedia(),
+        organization.getRegisterUser().getId());
     }
 
     @Override
@@ -50,5 +52,9 @@ public record OrganizationDTO(
     @Override
     public String socialMedia() {
         return socialMedia;
+    }
+    @Override
+    public Long userOrganizationId() {
+        return userOrganizationId;
     }
 }

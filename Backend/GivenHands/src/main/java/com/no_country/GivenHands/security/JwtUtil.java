@@ -17,9 +17,9 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(String email){
+    public String generateToken(Long userId){
         return Jwts.builder()
-                .subject(email)
+                .subject(userId.toString())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis()+EXPIRATION_TIME))
                 .signWith(getSigningKey())
