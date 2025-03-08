@@ -1,8 +1,11 @@
 package com.no_country.GivenHands.model;
 
+import com.no_country.GivenHands.model.enumeration.Preference;
 import com.no_country.GivenHands.model.enumeration.Skill;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Set;
 
 @Entity
@@ -25,12 +28,13 @@ public class Volunteer {
 
     private int phone;
 
-    private String location;
-
     @Embedded
     private Address address;
 
-    private String disponibilidad;
+    private LocalDate birthday;
+
+    @Enumerated(EnumType.STRING)
+    private Preference preference;
 
     @Enumerated(EnumType.STRING)
     private Skill skills;
@@ -38,16 +42,16 @@ public class Volunteer {
     @ManyToMany(mappedBy = "volunteers")
     private Set<Project> projects;
 
-    public Volunteer(Long id, RegisterUser registerUser, String name, String lastname, int age, int phone, String location, Address address, String disponibilidad, Skill skills, Set<Project> projects) {
+    public Volunteer(Long id, RegisterUser registerUser, String name, String lastname, int age, int phone, Address address, LocalDate birthday, Preference preference, Skill skills, Set<Project> projects) {
         this.id = id;
         this.registerUser = registerUser;
         this.name = name;
         this.lastname = lastname;
         this.age = age;
         this.phone = phone;
-        this.location = location;
         this.address = address;
-        this.disponibilidad = disponibilidad;
+        this.birthday = birthday;
+        this.preference = preference;
         this.skills = skills;
         this.projects = projects;
     }
@@ -87,10 +91,6 @@ public class Volunteer {
         this.lastname = lastname;
     }
 
-    public int getAge() {
-        return age;
-    }
-
     public void setAge(int age) {
         this.age = age;
     }
@@ -103,14 +103,6 @@ public class Volunteer {
         this.phone = phone;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public Address getAddress() {
         return address;
     }
@@ -119,21 +111,9 @@ public class Volunteer {
         this.address = address;
     }
 
-    public String getDisponibilidad() {
-        return disponibilidad;
-    }
+    public Skill getSkills() {return skills;    }
 
-    public void setDisponibilidad(String disponibilidad) {
-        this.disponibilidad = disponibilidad;
-    }
-
-    public Skill getSkills() {
-        return skills;
-    }
-
-    public void setSkills(Skill skills) {
-        this.skills = skills;
-    }
+    public void setSkills(Skill skills) { this.skills = skills;    }
 
     public Set<Project> getProjects() {
         return projects;
@@ -142,4 +122,26 @@ public class Volunteer {
     public void setProjects(Set<Project> projects) {
         this.projects = projects;
     }
+
+    public LocalDate getBirthday() {  return birthday;    }
+
+    public Preference getPreference() {  return preference;    }
+
+    public void setPreference(Preference preference) {this.preference = preference;    }
+
+    // Método para calcular la edad dinámicamente
+    @Transient
+    public int getAge() {
+        if (birthday == null) {
+            return 0; // Si no hay fecha de nacimiento, se devuelve 0
+        }
+        return Period.between(birthday, LocalDate.now()).getYears();
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+        this.age = (birthday != null) ? Period.between(birthday, LocalDate.now()).getYears() : 0;
+    }
+
+
 }
