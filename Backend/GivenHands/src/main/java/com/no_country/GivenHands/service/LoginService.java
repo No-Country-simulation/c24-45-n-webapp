@@ -4,7 +4,7 @@ import com.no_country.GivenHands.dto.LoginDTO;
 import com.no_country.GivenHands.exception.MiException;
 import com.no_country.GivenHands.model.RegisterUser;
 import com.no_country.GivenHands.repository.RegisterUserRepository;
-import com.no_country.GivenHands.security.JwtUtil;
+import com.no_country.GivenHands.infra.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

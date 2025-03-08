@@ -1,4 +1,4 @@
-package com.no_country.GivenHands.security;
+package com.no_country.GivenHands.infra.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
