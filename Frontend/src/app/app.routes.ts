@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { RegisterComponent } from './features/auth/register/register.component';
 
 export const routes: Routes = [
   {
@@ -22,5 +21,15 @@ export const routes: Routes = [
       path: 'complete-register-organization',
       loadComponent: () =>
         import('./features/auth/complete-register-organization/complete-register-organization.component').then((c) => c.CompleteRegisterOrganizationComponent),
+    },
+    {
+      path: 'organization-profile',
+      loadComponent: () =>
+      import('./features/auth/profiles/organization-profile/organization-profile.component').then((c) => c.OrganizationProfileComponent),
+    },
+    {
+      path: 'volunteer-profile',
+      loadComponent: () =>
+      import('./features/auth/profiles/volunteer-profile/volunteer-profile.component').then((c) => c.VolunteerProfileComponent),
     }
 ];
