@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
-</head>
-<body>
-  <main-navbar></main-navbar>
-  
-  <div class="mt-8 pb-8">
+  <div class="mt-8 w-screen pb-8">
   <form [formGroup]="miFormulario" (ngSubmit)="onSubmit()">
-  
+
       <div class="formulario-perfil">
         <h2 class="introform">Completa tu perfil para empezar esta experiencia</h2>
         <h2 class="tipoform">Voluntario</h2>
@@ -18,38 +8,38 @@
         <br>
         <div class="contenedor-columnas">
           <div class="campos-obligatorios">
-           
+
             <label for="names">Names<span class="required">*</span></label>
             <input type="text" id="names" />
-    
+
             <label for="surnames">Surnames<span class="required">*</span></label>
             <input type="text" id="surnames" />
-    
+
             <label for="birthday">Birthday<span class="required">*</span></label>
             <input type="date" id="birthday" />
-    
+
             <label for="country">Country<span class="required">*</span></label>
             <select id="country">
               <option value="ecuador">Ecuador</option>
             </select>
-    
+
             <label for="province">Province<span class="required">*</span></label>
             <select id="province">
               <option value="guayas">Guayas</option>
             </select>
-    
+
             <label for="city">City<span class="required">*</span></label>
             <select id="city">
               <option value="guayaquil">Guayaquil</option>
             </select>
-    
+
             <label for="volunteer-preference">Volunteer <br> preference</label>
             <input type="text" id="volunteer-preference" />
-    
+
             <label for="skills">Skills</label>
             <textarea id="skills"></textarea>
           </div>
-    
+
           <div class="columna-derecha">
               <div class="avatar">
                   <label for="avatar-upload">
@@ -65,31 +55,28 @@
             <div class="info-novisible">
               <label for="phone">Phone<span class="required">*</span></label>
               <input class="nopublic_input" type="tel" id="phone" />
-         
-          
+
+
               <label for="address">Address<span class="required">*</span></label>
               <input class="nopublic_input" type="text" id="address" />
-          
-         
+
+
               <label for="zip-code">Zip Code</label>
               <input class="nopublic_input" type="text" id="zip-code" />
             </div>
-               
-           
+
+
             </div>
-            
+
           </div>
-         
+
         </div>
-       
+
         <div class="contenedor-guardar">
           <button class="guardar" (click)="irMuro()">Guardar</button>
         </div>
       </div>
-     
+
     </form>
 </div>
-
-</body>
-</html>
 

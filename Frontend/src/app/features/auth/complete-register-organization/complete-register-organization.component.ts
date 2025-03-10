@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { MainNavbarComponent } from "../../main/layout/main-navbar/main-navbar.component";
 
 @Component({
   selector: 'app-complete-register-organization',
   standalone: true,
   templateUrl: './complete-register-organization.component.html',
   styleUrls: ['./complete-register-organization.component.css'],
-  imports: [MainNavbarComponent]
+  imports: []
 })
 export class CompleteRegisterOrganizationComponent {
   profileImage: string = 'assets/default-profile-organization.svg';
