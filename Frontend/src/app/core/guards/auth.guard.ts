@@ -9,7 +9,7 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   function canActivate(){
     const isLogged = jwtSvc.isLogged
-    if(!isLogged){
+    if(!isLogged()){
       router.navigate(['/login'],{replaceUrl:true})
       return false
     }
