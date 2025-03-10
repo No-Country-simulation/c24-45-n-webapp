@@ -6,10 +6,9 @@ export const routes: Routes = [
     path: 'home',
     loadComponent: () =>
       import('./features/home/home.component').then((c) => c.HomeComponent),
-    pathMatch: 'full',
   },
   {
-    path: '',
+    path: 'main',
     loadChildren: () => import('./features/main/main.routes').then(r => r.routes),
     canActivate: [authGuard]
   },
@@ -22,22 +21,6 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () =>
       import('./features/auth/login/login.component').then((c) => c.LoginComponent),
-  },
-  {
-    path: 'complete-register-organization',
-    loadComponent: () =>
-      import('./features/auth/complete-register-organization/complete-register-organization.component').then((c) => c.CompleteRegisterOrganizationComponent),
-    canActivate: [authGuard]
-  },
-  {
-    path: 'complete-register-volunteer',
-    loadComponent: () =>
-      import('./volunteer-form/volunteer-form.component').then((c) => c.VolunteerFormComponent),
-  },
-  {
-    path: 'muro',
-    loadComponent: () =>
-      import('./muro/muro.component').then((c) => c.MuroComponent),
   },
   {
     path: '**',
