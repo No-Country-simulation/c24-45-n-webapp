@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
+import { JwtService } from '../../../../core/services/jwt.service';
 
 @Component({
   selector: 'main-navbar',
@@ -9,6 +10,9 @@ import { Component } from '@angular/core';
 })
 export class MainNavbarComponent {
   isToggled:boolean = true;
+  private readonly jwtSvc = inject(JwtService)
+
+  user = signal<string>(this.jwtSvc.decodedToken()!.sub)
 
   toggleMenu(){
     this.isToggled = !this.isToggled;

@@ -1,39 +1,69 @@
 package com.no_country.GivenHands.service;
 
+import com.no_country.GivenHands.dto.ProjectDTO;
+import com.no_country.GivenHands.model.Organization;
 import com.no_country.GivenHands.model.Project;
+import com.no_country.GivenHands.model.Volunteer;
+import com.no_country.GivenHands.repository.OrganizationRepository;
 import com.no_country.GivenHands.repository.ProjectRepository;
+import com.no_country.GivenHands.repository.VolunteerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectService {
 
     @Autowired
     private ProjectRepository projectRepository;
-    public void createProject(Project project) {
+
+    @Autowired
+    private OrganizationRepository organizationRepository;
+
+    @Autowired
+    private VolunteerRepository volunteerRepository;
+
+    public void createProject(ProjectDTO projectDTO) {
         Project newProject = new Project();
-        newProject.setName(project.getName());
-        newProject.setDescription(project.getDescription());
-        newProject.setLocation(project.getLocation());
-        newProject.setTypeOfActivity(project.getTypeOfActivity());
-        newProject.setStatus(project.isStatus());
-        newProject.setStartDate(project.getStartDate());
-        newProject.setEndDate(project.getEndDate());
-        newProject.setSkillsRequired(project.getSkillsRequired());
-        newProject.setOrganization(project.getOrganization());
-//        newProject.setUser(project.getUser());
+        newProject.setName(projectDTO.name());
+        newProject.setDescription(projectDTO.description());
+        newProject.setLocation(projectDTO.location());
+        newProject.setTypeOfActivity(projectDTO.typeOfActivity());
+        newProject.setStatus(true);
+        newProject.setStartDate(projectDTO.startDate());
+        newProject.setEndDate(projectDTO.endDate());
+        newProject.setSkillsRequired(projectDTO.skillsRequired());
+
+        Organization organization = organizationRepository.findById(projectDTO.organizationId())
+                .orElseThrow(()-> new RuntimeException("Organización no encontrada"));
+        newProject.setOrganization(organization);
         projectRepository.save(newProject);
     }
 
-    public List<Project> getAllProjects() {
-        return projectRepository.findAll();//recupera todos los proyectos
+    public void addVolunteerToProject(Long projectId, Long volunteerId){
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(()-> new RuntimeException("Proyecto no encontrado"));
+
+        Volunteer volunteer = volunteerRepository.findById(volunteerId)
+                .orElseThrow(()-> new RuntimeException("Voluntario no encontrado"));
+
+        project.getVolunteers().add(volunteer);
+        volunteer.getProjects().add(project);
+
+        projectRepository.save(project);
+        volunteerRepository.save(volunteer);
+
     }
-    public Project getProjectById(Long id) {
-        return projectRepository.findById(id).orElse(null);
+
+    public List<ProjectDTO> getAllProjects() {
+        return projectRepository.findAll().stream().map(ProjectDTO::new).collect(Collectors.toList());
+    }
+    public Optional<ProjectDTO> getProjectById(Long id) {
+        return projectRepository.findById(id).map(ProjectDTO::new);
     }
 
     public Project updateProject(Long id, Project projectDetails) {
@@ -61,4 +91,7 @@ public class ProjectService {
         }
     }
 
-}
+    public List<ProjectDTO> searchProjects(String name, String location, String type, Boolean status) {
+            return projectRepository.searchProjects(name, location, type, status);
+        }
+    }

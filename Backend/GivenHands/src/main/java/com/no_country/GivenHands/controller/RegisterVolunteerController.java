@@ -5,11 +5,9 @@ import com.no_country.GivenHands.service.RegisterVolunteerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/volunteer")
 public class RegisterVolunteerController {
@@ -24,6 +22,16 @@ public class RegisterVolunteerController {
         } catch (Exception e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<Object> getUserOrganizationById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(registerVolunteerService.getUserVolunteerById(id));
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
     }
 }
 

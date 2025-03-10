@@ -1,4 +1,4 @@
-package com.no_country.GivenHands.security;
+package com.no_country.GivenHands.infra.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -17,9 +17,9 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(String email){
+    public String generateToken(Long userId){
         return Jwts.builder()
-                .subject(email)
+                .subject(userId.toString())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis()+EXPIRATION_TIME))
                 .signWith(getSigningKey())
