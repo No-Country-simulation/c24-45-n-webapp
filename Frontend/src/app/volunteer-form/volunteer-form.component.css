@@ -158,3 +158,17 @@ body {
 .required {
   color: red;
 }
+
+
+.input-container {
+  position: relative;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8em;
+  text-align: center;
+
+  
+
+}

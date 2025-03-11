@@ -5,7 +5,7 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angula
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ReactiveFormsModule],
+  imports: [RouterOutlet, ReactiveFormsModule,VolunteerFormComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
