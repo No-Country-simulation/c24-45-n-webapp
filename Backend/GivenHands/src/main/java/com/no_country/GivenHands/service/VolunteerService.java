@@ -1,5 +1,6 @@
 package com.no_country.GivenHands.service;
 
+import com.no_country.GivenHands.dto.UserDTO;
 import com.no_country.GivenHands.dto.VolunteerDTO;
 import com.no_country.GivenHands.model.RegisterUser;
 import com.no_country.GivenHands.model.Volunteer;
@@ -17,13 +18,34 @@ import java.util.Optional;
 public class VolunteerService {
     @Autowired
     private VolunteerRepository volunteerRepository;
+    @Autowired
     private RegisterUserRepository registerUserRepository;
 
     // Buscar voluntario por id
+//    public Optional<VolunteerDTO> getVolunteerById(Long id) {
+//        return volunteerRepository.findById(id)
+//                .map(VolunteerDTO::new);
+//    }
+
     public Optional<VolunteerDTO> getVolunteerById(Long id) {
-        return volunteerRepository.findById(id)
-                .map(VolunteerDTO::new);
+        return volunteerRepository.findById(id).map(volunteer -> {
+            // Crear el DTO del voluntario
+            VolunteerDTO volunteerDTO = new VolunteerDTO(volunteer);
+
+            // Verificar si el voluntario tiene un usuario asociado
+            if (volunteer.getRegisterUser() != null) {
+                RegisterUser registerUser = volunteer.getRegisterUser();
+
+                // Crear el DTO del usuario
+                UserDTO userDTO = new UserDTO(registerUser.getUserName(),
+                        registerUser.getEmail(),
+                        registerUser.getRol());
+            }
+
+            return volunteerDTO;
+        });
     }
+
 
     // Editar voluntario
     public VolunteerDTO updateVolunteer(Long id, Volunteer volunteerDetails) {
