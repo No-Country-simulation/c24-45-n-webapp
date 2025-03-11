@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
-import {
-  GetStartedNowButtonComponent,
-  SizeType,
-} from '../../../../shared/get-started-now-button/get-started-now-button.component';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'about-us',
-  imports: [GetStartedNowButtonComponent],
+  imports: [],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.css',
 })
 export class AboutUsComponent {
-  SizeType = SizeType;
+
+  router = inject(Router)
+
+  goToRegister(){
+    this.router.navigate(['/register'],{replaceUrl:true})
+  }
 }

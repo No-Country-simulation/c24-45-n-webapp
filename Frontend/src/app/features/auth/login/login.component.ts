@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { LoginData } from '../../../shared/models/login.interface';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,15 +17,15 @@ export class LoginComponent {
   loginForm: FormGroup;
   passwordVisibility = false;
   formSubmitted = false;
+  private readonly authSvc = inject(AuthService)
+  private readonly router = inject(Router)
 
   constructor(private fb: FormBuilder, private location: Location) {
     this.loginForm = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(8)]],
-        confirmPassword: ['', [Validators.required]]
       },
-      { validators: this.passwordMatchValidator }
     );
   }
 
@@ -31,25 +33,6 @@ export class LoginComponent {
   isEmailInvalid() {
     const emailControl = this.loginForm.get('email');
     return emailControl?.invalid && emailControl?.value !== '';
-  }
-
-  //para validar los campos de password y confirmar password
-  isConfirmPasswordInvalid() {
-    const confirmPasswordControl = this.loginForm.get('confirmPassword');
-    const passwordControl = this.loginForm.get('password');
-
-    if (!confirmPasswordControl || !passwordControl) {
-      return false;
-    }
-
-    return confirmPasswordControl?.value !== '' && passwordControl?.value !== confirmPasswordControl?.value;
-  }
-
-  //para verificar que el password y confirmar password sean iguales en tiempo real
-  passwordMatchValidator(formGroup: FormGroup) {
-    const password = formGroup.get('password')?.value;
-    const confirmPassword = formGroup.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
   //para manejar las invalidaciones
@@ -61,11 +44,17 @@ export class LoginComponent {
   //para enviar el formulario, falta implementar la logica de envio
   onSubmit() {
     this.formSubmitted = true;
-    if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
-    } else {
-      console.log('Form is invalid');
+    if (!this.loginForm.valid) {
+      return console.log('Form is invalid');
     }
+    const loginData:LoginData = this.loginForm.getRawValue()
+    this.authSvc.login(loginData).subscribe({
+      next:r=>{
+        localStorage.setItem('token', r.token)
+      },
+      error:e=>console.log(e),
+      complete:()=> this.router.navigate(['/'],{replaceUrl:true})
+    })
   }
 
   // Es para volver a la pagina anterior

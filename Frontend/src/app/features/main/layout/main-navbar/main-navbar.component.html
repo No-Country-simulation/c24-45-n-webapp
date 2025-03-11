@@ -1,4 +1,4 @@
-<header class="px-4 w-full flex flex-row justify-between items-center">
+<header class="px-4 w-full flex flex-row justify-between items-center relative bg-white">
   <div class="flex flex-row items-center">
     <img src="./images/logo.svg" class="w-24" alt="logo-image">
     <h1 class="text-4xl">Give <span class="text-emerald-800">Hands</span></h1>
@@ -16,9 +16,16 @@
       <img src="./icons/bell.svg" class="w-12" alt="bell-ico">
       <span>Notifications</span>
     </a>
-    <button class="w-14 h-14 bg-blue-400 cursor-pointer hover:bg-blue-300 transition-all duration-200 rounded-full relative flex justify-center items-center">
+    <button (click)="toggleMenu()" class="w-14 h-14 bg-blue-400 cursor-pointer hover:bg-blue-300 transition-all duration-200 rounded-full relative flex justify-center items-center">
       <span class="text-3xl">G</span>
       <img src="./icons/arrow-down.svg" class="w-5 absolute bottom-0 right-1" alt="arrow-down-ico">
     </button>
+    <ul class="px-10 py-5 gap-5 absolute top-18 right-8 bg-emerald-600 min-w-72 text-white rounded-3xl transition-all duration-300 transform origin-top"
+        [ngClass]="{'hidden scale-95 opacity-0 pointer-events-none': isToggled, 'flex flex-col scale-100 opacity-100': !isToggled}">
+      <li class="text-2xl text-center">{{user().split('@')[0]}}</li>
+      <hr>
+      <li class="text-2xl w-auto px-2 py-1 cursor-pointer hover:bg-gray-200 hover:text-black rounded-2xl text-center transition-all duration-200"><a >Profile</a></li>
+      <li class="text-2xl w-auto px-2 py-1 cursor-pointer hover:bg-gray-200 hover:text-black rounded-2xl text-center transition-all duration-200"><a >Log out</a></li>
+    </ul>
   </div>
 </header>

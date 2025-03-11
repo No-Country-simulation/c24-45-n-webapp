@@ -3,6 +3,8 @@ package com.no_country.GivenHands.model;
 import com.no_country.GivenHands.model.enumeration.Cause;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Organization")
 public class Organization {
@@ -33,11 +35,14 @@ public class Organization {
 
     private String socialMedia;
 
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Project> projects;
+
 
     public Organization() {
     }
 
-    public Organization(Long id, RegisterUser registerUser, String name, String description, Cause cause, Address address, int phone, String webSite, String socialMedia) {
+    public Organization(Long id, RegisterUser registerUser, String name, String description, Cause cause, Address address, int phone, String webSite, String socialMedia, List<Project> projects) {
         this.id = id;
         this.registerUser = registerUser;
         this.name = name;
@@ -47,6 +52,7 @@ public class Organization {
         this.phone = phone;
         this.webSite = webSite;
         this.socialMedia = socialMedia;
+        this.projects = projects;
     }
 
     public Long getId() {
@@ -119,5 +125,13 @@ public class Organization {
 
     public void setSocialMedia(String socialMedia) {
         this.socialMedia = socialMedia;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }

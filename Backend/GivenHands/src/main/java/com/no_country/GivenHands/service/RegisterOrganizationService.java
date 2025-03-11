@@ -1,16 +1,18 @@
 package com.no_country.GivenHands.service;
 
 import com.no_country.GivenHands.dto.RegisterOrganizationDto;
-import com.no_country.GivenHands.model.Address;
+import com.no_country.GivenHands.dto.UserDTO;
 import com.no_country.GivenHands.model.Organization;
 import com.no_country.GivenHands.model.RegisterUser;
-import com.no_country.GivenHands.model.enumeration.Cause;
 import com.no_country.GivenHands.model.enumeration.Rol;
 import com.no_country.GivenHands.repository.OrganizationRepository;
 import com.no_country.GivenHands.repository.RegisterUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class RegisterOrganizationService {
@@ -67,5 +69,20 @@ public class RegisterOrganizationService {
         if (description == null || description.isEmpty()) {
             throw new IllegalArgumentException("La descripcion no puede estar vacía.");
         }
+    }
+
+    public Map<String, String> getUserOrganizationById(Long id) {
+        RegisterUser registerUser = registerUserRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Usuario no encontrado"));
+
+        UserDTO userDTO = new UserDTO(registerUser.getUserName(),
+                registerUser.getEmail(), registerUser.getRol());
+
+        Map<String, String> response = new HashMap<>();
+        response.put("userName", userDTO.userName());
+        response.put("email", userDTO.email());
+        response.put("rol", userDTO.rol().toString());
+
+        return response;
     }
 }
