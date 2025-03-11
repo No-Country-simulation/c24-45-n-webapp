@@ -1,10 +1,8 @@
 package com.no_country.GivenHands.dto;
 
-import com.no_country.GivenHands.model.*;
+import com.no_country.GivenHands.model.Volunteer;
 import com.no_country.GivenHands.model.enumeration.Preference;
 import com.no_country.GivenHands.model.enumeration.Skill;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 
 import java.time.LocalDate;
 
@@ -15,15 +13,13 @@ public record VolunteerDTO(
         String country,
         String state,
         String city,
-        @Enumerated(EnumType.STRING)
         Preference preference,
         int phone,
         String street,
         String cp,
-        @Enumerated(EnumType.STRING)
         Skill skills,
-        Long userVolunteerId
-
+        Long userVolunteerId,
+        UserDTO user // Nuevo campo para incluir los datos del usuario
 ) {
     public VolunteerDTO(Volunteer volunteer) {
         this(volunteer.getName(),
@@ -37,7 +33,11 @@ public record VolunteerDTO(
                 volunteer.getAddress().street(),
                 volunteer.getAddress().cp(),
                 volunteer.getSkills(),
-                volunteer.getRegisterUser().getId()
-                );
+                (volunteer.getRegisterUser() != null) ? volunteer.getRegisterUser().getId() : null,
+                (volunteer.getRegisterUser() != null) ?
+                        new UserDTO(volunteer.getRegisterUser().getUserName(),
+                                volunteer.getRegisterUser().getEmail(),
+                                volunteer.getRegisterUser().getRol()) : null
+        );
     }
 }
