@@ -1,6 +1,7 @@
 package com.no_country.GivenHands.dto;
 
 import com.no_country.GivenHands.model.Organization;
+import com.no_country.GivenHands.model.RegisterUser;
 import com.no_country.GivenHands.model.enumeration.Cause;
 
 public record OrganizationDTO(
@@ -10,7 +11,8 @@ public record OrganizationDTO(
         int phone,
         String webSite,
         String socialMedia,
-        Long userOrganizationId
+        Long userOrganizationId,
+        UserDTO userDTO
 ) {
 
 
@@ -21,7 +23,9 @@ public record OrganizationDTO(
         organization.getPhone(),
         organization.getWebSite(),
         organization.getSocialMedia(),
-        organization.getRegisterUser().getId());
+        organization.getRegisterUser().getId(),
+        new UserDTO(organization.getRegisterUser())
+        );
     }
 
     @Override
@@ -56,5 +60,10 @@ public record OrganizationDTO(
     @Override
     public Long userOrganizationId() {
         return userOrganizationId;
+    }
+
+    @Override
+    public UserDTO userDTO() {
+        return userDTO;
     }
 }
