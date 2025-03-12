@@ -12,10 +12,13 @@ public record RegisterOrganizationDto(
         String name,
         String description,
         Cause cause,
-        Address address,
+        String country,
+        String state,
+        String city,
+        String street,
+        String cp,
         int phone,
         String webSite,
         String socialMedia
 ) {
-
 }
