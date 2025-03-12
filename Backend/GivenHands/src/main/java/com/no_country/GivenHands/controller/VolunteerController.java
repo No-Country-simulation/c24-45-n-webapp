@@ -1,6 +1,7 @@
 package com.no_country.GivenHands.controller;
 
 import com.no_country.GivenHands.dto.OrganizationDTO;
+import com.no_country.GivenHands.dto.RequestVolunteerDTO;
 import com.no_country.GivenHands.dto.VolunteerDTO;
 import com.no_country.GivenHands.model.Project;
 import com.no_country.GivenHands.model.Volunteer;
@@ -32,12 +33,12 @@ public class VolunteerController {
 
     // Editar voluntario
     @PatchMapping("/{id}")
-    public ResponseEntity<Object> updateVolunteer(@PathVariable Long id, @RequestBody Volunteer volunteer) {
-        VolunteerDTO updatedVolunteer = volunteerService.updateVolunteer(id, volunteer);
-        if (updatedVolunteer != null) {
+    public ResponseEntity<Object> updateVolunteer(@PathVariable Long id, @RequestBody RequestVolunteerDTO request) {
+        try {
+            VolunteerDTO updatedVolunteer = volunteerService.updateVolunteer(id, request);
             return ResponseEntity.ok(updatedVolunteer);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el voluntario con ID: " + id);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
