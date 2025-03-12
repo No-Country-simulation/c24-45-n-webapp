@@ -6,10 +6,9 @@ export const routes: Routes = [
     path: 'home',
     loadComponent: () =>
       import('./features/home/home.component').then((c) => c.HomeComponent),
-    pathMatch: 'full',
   },
   {
-    path: '',
+    path: 'main',
     loadChildren: () => import('./features/main/main.routes').then(r => r.routes),
     canActivate: [authGuard]
   },
@@ -30,7 +29,7 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: 'complete-register-volunteer',
+    path: 'volunteer-form',
     loadComponent: () =>
       import('./volunteer-form/volunteer-form.component').then((c) => c.VolunteerFormComponent),
   },

@@ -13,51 +13,49 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  title = 'Sign in with us'
+  title = 'Sign in with us';
   loginForm: FormGroup;
   passwordVisibility = false;
   formSubmitted = false;
-  private readonly authSvc = inject(AuthService)
-  private readonly router = inject(Router)
+  errorMessage = ''; // Mensaje de error para el usuario
+
+  private readonly authSvc = inject(AuthService);
+  private readonly router = inject(Router);
 
   constructor(private fb: FormBuilder, private location: Location) {
-    this.loginForm = this.fb.group(
-      {
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8)]],
-      },
-    );
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+    });
   }
 
-  //para validar el campo email y que este no sea invalido
-  isEmailInvalid() {
+  // Validar el campo de email
+  isEmailInvalid(): boolean {
     const emailControl = this.loginForm.get('email');
-    return emailControl?.invalid && emailControl?.value !== '';
+    return !!(emailControl && emailControl.invalid && (emailControl.touched || this.formSubmitted));
   }
-
-  //para manejar las invalidaciones
-  isFieldInvalid(fieldName: string) {
+  
+  isFieldInvalid(fieldName: string): boolean {
     const control = this.loginForm.get(fieldName);
-    return control?.invalid && this.formSubmitted;
+    return !!(control && control.invalid && (control.touched || this.formSubmitted));
   }
+  
 
-  //para enviar el formulario, falta implementar la logica de envio
+  // Envío del formulario con manejo de errores
   onSubmit() {
     this.formSubmitted = true;
+  
     if (!this.loginForm.valid) {
-      return console.log('Form is invalid');
+      console.log('Formulario no válido');
+      return;
     }
-    const loginData:LoginData = this.loginForm.getRawValue()
-    this.authSvc.login(loginData).subscribe({
-      next:r=>{
-        localStorage.setItem('token', r.token)
-      },
-      error:e=>console.log(e),
-      complete:()=> this.router.navigate(['/'],{replaceUrl:true})
-    })
+    console.log('Inicio de sesión exitoso. Redirigiendo...');
+    this.router.navigate(['/organization-profile'], { replaceUrl: true }); 
   }
+  
+  
 
-  // Es para volver a la pagina anterior
+  // Regresar a la página anterior
   goBack() {
     this.location.back();
   }

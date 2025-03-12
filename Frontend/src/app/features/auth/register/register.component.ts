@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
+import { VolunteerService } from '../../../core/services/volunteer.service';
+import { OrganizationService } from '../../../core/services/organization.service';
+import { catchError } from 'rxjs';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -15,12 +19,15 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   formSubmitted = false;
   userType: string | null = null;
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
     private location: Location,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private volunteerService: VolunteerService,
+    private organizationService: OrganizationService
   ) {
     this.registerForm = this.fb.group(
       {
@@ -87,25 +94,42 @@ export class RegisterComponent implements OnInit {
   // Para enviar el formulario, me falta la lógica de enviar los datos al servidor
   onSubmit() {
     this.formSubmitted = true;
-
+  
     if (this.registerForm.valid) {
       const userData = this.registerForm.value;
       console.log('Formulario de registro:', userData);
-
+  
       if (this.userType === 'organization') {
-        //espacio para la logica de envio a la base de datos
-
-        // con esto puedo redirigir a complete-register-organization al registrarme
-        this.router.navigate(['/complete-register-organization']);
+        // Enviar datos de la organización
+        this.organizationService.createOrganization(userData).subscribe({
+          next: (res) => {
+            console.log('Organización registrada:', res);
+            this.router.navigate(['/complete-register-organization']);
+          },
+          error: (err) => {
+            console.error('Error al registrar organización:', err);
+            this.errorMessage = 'Error al registrar la organización';
+          }
+        });
+  
       } else {
-        //this.registerForm.reset();
-        //this.formSubmitted = false;
-        this.router.navigate(['/volunteer-form']);
+        // Enviar datos del voluntario
+        this.volunteerService.registerVolunteer(userData).subscribe({
+          next: (res) => {
+            console.log('Voluntario registrado:', res);
+            this.router.navigate(['/volunteer-form']);
+          },
+          error: (err) => {
+            console.error('Error al registrar voluntario:', err);
+            this.errorMessage = 'Error al registrar el voluntario';
+          }
+        });
       }
     } else {
       console.log('Formulario no válido');
     }
   }
+  
 
   // Para volver a home
   goBack() {
