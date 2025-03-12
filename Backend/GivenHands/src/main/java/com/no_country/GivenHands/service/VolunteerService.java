@@ -1,11 +1,14 @@
 package com.no_country.GivenHands.service;
 
+import com.no_country.GivenHands.dto.ProjectDTO;
 import com.no_country.GivenHands.dto.RequestVolunteerDTO;
 import com.no_country.GivenHands.dto.UserDTO;
 import com.no_country.GivenHands.dto.VolunteerDTO;
 import com.no_country.GivenHands.model.Address;
+import com.no_country.GivenHands.model.Project;
 import com.no_country.GivenHands.model.RegisterUser;
 import com.no_country.GivenHands.model.Volunteer;
+import com.no_country.GivenHands.repository.ProjectRepository;
 import com.no_country.GivenHands.repository.RegisterUserRepository;
 import com.no_country.GivenHands.repository.VolunteerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class VolunteerService {
@@ -22,6 +28,7 @@ public class VolunteerService {
     private VolunteerRepository volunteerRepository;
     @Autowired
     private RegisterUserRepository registerUserRepository;
+    private ProjectRepository projectRepository;
 
     // Buscar voluntario por id
 //    public Optional<VolunteerDTO> getVolunteerById(Long id) {
@@ -118,4 +125,14 @@ public class VolunteerService {
             throw new RuntimeException("Voluntario no encontrado con el id: " + id);
         }
     }
+
+    // Listar todos los proyectos de un voluntario
+    public List<ProjectDTO> getProjectsByVolunteerId(Long volunteerId) {
+        return volunteerRepository.findById(volunteerId)
+                .map(volunteer -> volunteer.getProjects().stream()
+                        .map(ProjectDTO::new) // Convertimos cada `Project` en `ProjectDTO`
+                        .collect(Collectors.toList()))
+                .orElse(Collections.emptyList()); // Si no se encuentra el voluntario, devuelve lista vacía
+    }
+
 }
