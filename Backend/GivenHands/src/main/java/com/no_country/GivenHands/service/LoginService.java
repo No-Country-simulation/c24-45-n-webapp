@@ -1,18 +1,19 @@
 package com.no_country.GivenHands.service;
 
 import com.no_country.GivenHands.dto.LoginDTO;
-import com.no_country.GivenHands.dto.LoginResponseDTO;
+import com.no_country.GivenHands.dto.LoginResponseOrganizationDTO;
+import com.no_country.GivenHands.dto.LoginResponseVolunteerDTO;
 import com.no_country.GivenHands.exception.MiException;
+import com.no_country.GivenHands.model.Organization;
 import com.no_country.GivenHands.model.RegisterUser;
 import com.no_country.GivenHands.model.Volunteer;
+import com.no_country.GivenHands.model.enumeration.Cause;
+import com.no_country.GivenHands.model.enumeration.Rol;
 import com.no_country.GivenHands.repository.RegisterUserRepository;
 import com.no_country.GivenHands.infra.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class LoginService {
@@ -32,40 +33,60 @@ public class LoginService {
 //    }
 
     @Transactional(readOnly = true)
-    public LoginResponseDTO loginUser(LoginDTO loginDTO) throws MiException{
+    public Object loginUser(LoginDTO loginDTO) throws MiException{
         RegisterUser registerUser = registerUserRepository.buscarPorEmail(loginDTO.email());
+
         if(!(loginDTO.password().equals(registerUser.getPassword()) )){
             throw new MiException("Credenciales incorrectas");
         }
         String token = jwtUtil.generateToken(registerUser.getId());
 
-        Volunteer volunteer = registerUser.getVolunteer();
+        if(registerUser.getRol().equals(Rol.VOLUNTEER)){
+            Volunteer volunteer = registerUser.getVolunteer();
 
-        LoginResponseDTO.UserDTO userDTO = new LoginResponseDTO.UserDTO(
-                registerUser.getUserName(),
-                registerUser.getEmail(),
-                registerUser.getRol().toString()
-        );
+            LoginResponseVolunteerDTO.UserDTO userDTO = new LoginResponseVolunteerDTO.UserDTO(
+                    registerUser.getUserName(),
+                    registerUser.getEmail(),
+                    registerUser.getRol().toString()
+            );
 
-        LoginResponseDTO response = new LoginResponseDTO(
-                token,
-                volunteer.getId(),
-                volunteer.getName(),
-                volunteer.getLastname(),
-                volunteer.getBirthday(),
-                volunteer.getAddress(),
-//                volunteer.getAddress().getCountry(),
-//                volunteer.getAddress().getState(),
-//                volunteer.getAddress().getCity(),
-                volunteer.getPreference(),
-                volunteer.getPhone(),
-//                volunteer.getAddress().getStreet(),
-//                volunteer.getAddress().getCp(),
-                volunteer.getSkills(),
-                userDTO
-        );
+            return new LoginResponseVolunteerDTO(
+                    token,
+                    volunteer.getId(),
+                    volunteer.getName(),
+                    volunteer.getLastname(),
+                    volunteer.getBirthday(),
+                    volunteer.getAddress(),
+                    volunteer.getPreference(),
+                    volunteer.getPhone(),
+                    volunteer.getSkills(),
+                    userDTO
+            );
 
-        return response;
+        }else if (registerUser.getRol().equals(Rol.ORGANIZATION)){
+            Organization organization = registerUser.getOrganization();
+
+            LoginResponseOrganizationDTO.UserDTO userDTO = new LoginResponseOrganizationDTO.UserDTO(
+                    registerUser.getUserName(),
+                    registerUser.getEmail(),
+                    registerUser.getRol().toString()
+            );
+
+            return new LoginResponseOrganizationDTO(
+                    token,
+                    organization.getId(),
+                    organization.getName(),
+                    organization.getDescription(),
+                    organization.getCause(),
+                    organization.getPhone(),
+                    organization.getWebSite(),
+                    organization.getSocialMedia(),
+                    userDTO
+            );
+        }else{
+            throw new MiException("Rol no válido.");
+        }
+
     }
 
 }
