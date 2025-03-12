@@ -1,7 +1,9 @@
 package com.no_country.GivenHands.repository;
 
 import com.no_country.GivenHands.dto.ProjectDTO;
+import com.no_country.GivenHands.model.Organization;
 import com.no_country.GivenHands.model.Project;
+import com.no_country.GivenHands.model.Volunteer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,6 +13,10 @@ import java.util.List;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
+
+    List<Project> findByOrganization(Organization organization);
+
+    List<Project> findByVolunteersContaining(Volunteer volunteer);
 
     @Query("SELECT p FROM Project p WHERE " +
             "(:name IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%'))) AND " +
