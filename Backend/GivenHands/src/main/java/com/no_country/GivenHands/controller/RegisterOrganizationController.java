@@ -19,12 +19,14 @@ public class RegisterOrganizationController {
     private RegisterOrganizationService registerOrganizationService;
 
     @PostMapping("/register")
-    public ResponseEntity<Object> registerOrganization(@RequestBody RegisterOrganizationDto registerOrganizationDto){
+    public ResponseEntity<String> registerOrganization(@RequestBody RegisterOrganizationDto registerOrganizationDto) {
         try {
             registerOrganizationService.registerOrganization(registerOrganizationDto);
-            return ResponseEntity.ok("Organizacion registrada");
-        } catch (Exception e){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Organización registrada exitosamente.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error inesperado.");
         }
     }
 
