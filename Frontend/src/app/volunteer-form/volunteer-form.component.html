@@ -62,16 +62,35 @@
             </span>
           </div>
 
+
           <label for="volunteer-preference">Volunteer <span class="required">*</span> <br> preference</label>
           <div class="input-container">
-            <input type="text" id="volunteer-preference" formControlName="volunteerPreference" />
+            <select id="volunteerPreference" formControlName="volunteerPreference">
+              <option value="ENVIRONMENTALIST">ENVIRONMENTALIST</option>
+              <option value="GERIATRICIAN">GERIATRICIAN</option>
+              <option value="ANIMALIST">ANIMALIST</option>
+              <option value="EDUCATIONAL">EDUCATIONAL</option>
+              <option value="HEALTH">HEALTH</option>
+              <option value="CULTURAL">CULTURAL</option>
+              <option value="CONSTRUCTION">CONSTRUCTION</option>
+              <option value="GENERAL">GENERAL</option>
+            </select>
             <span *ngIf="miFormulario.get('volunteerPreference')?.invalid && formSubmitted" class="error-message">
               <span *ngIf="miFormulario.get('volunteerPreference')?.errors?.['required']">Campo requerido</span>
             </span>
           </div>
 
           <label for="skills">Skills</label>
-          <textarea id="skills" formControlName="skills"></textarea>
+          <select id="skills" formControlName="skills">
+            <option value="HEALTH">HEALTH</option>
+            <option value="TUTORIA">TUTORIA</option>
+            <option value="ENVIRONMENT">ENVIRONMENT</option>
+            <option value="TECHNOLOGICAL">TECHNOLOGICAL</option>
+            <option value="LEGALADVISOR">LEGALADVISOR</option>
+            <option value="GENERAL">GENERAL</option>
+            <option value="EMERGENCY">EMERGENCY</option>
+            <option value="PROFESSIONALADVISORY">PROFESSIONALADVISORY</option>
+          </select>
         </div>
 
         <div class="columna-derecha">

@@ -39,10 +39,10 @@ export class VolunteerFormComponent implements OnInit {
       province: ['', Validators.required],
       city: ['', Validators.required],
       volunteerPreference: ['', Validators.required],
-      skills: ['', Validators.required],
+      skills: [''],
       phone: ['', Validators.required],
       address: ['', Validators.required],
-      zipCode: ['', Validators.required],
+      zipCode: [''],
       avatar: [null],
     });
   }
@@ -51,7 +51,7 @@ export class VolunteerFormComponent implements OnInit {
     this.formSubmitted = true;
     if (this.miFormulario.valid) {
       console.log( this.formSubmitted);
-      console.log(this.miFormulario.value);
+      console.log(this.miFormulario.getRawValue());
       this.router.navigate(['/muro']);
     }
     else {
