@@ -1,16 +1,13 @@
 package com.no_country.GivenHands.controller;
 
 import com.no_country.GivenHands.dto.LoginDTO;
-import com.no_country.GivenHands.dto.LoginResponseDTO;
+import com.no_country.GivenHands.dto.LoginResponseVolunteerDTO;
 import com.no_country.GivenHands.exception.MiException;
 import com.no_country.GivenHands.service.LoginService;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -24,7 +21,7 @@ public class LoginController {
     public ResponseEntity<Object> login(@RequestBody LoginDTO loginDTO){
         try {
 //            String token = loginService.loginUser(loginDTO);
-            LoginResponseDTO response = loginService.loginUser(loginDTO);
+            Object response = loginService.loginUser(loginDTO);
             return ResponseEntity.ok(response);
 //            Map<String, String> response = new HashMap<>();
 //            response.put("token", token);

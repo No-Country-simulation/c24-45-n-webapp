@@ -6,7 +6,7 @@ import com.no_country.GivenHands.model.enumeration.Skill;
 
 import java.time.LocalDate;
 
-public record LoginResponseDTO(
+public record LoginResponseVolunteerDTO(
         String token,
         Long volunteerId,
         String name,
