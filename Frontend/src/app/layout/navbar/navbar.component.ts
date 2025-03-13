@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtService } from '../../core/services/jwt.service';
 
 @Component({
   selector: 'navbar-component',
@@ -8,9 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor(private router: Router) {}
 
-  onSignIn() {
-    this.router.navigate(['/login']);
+  private readonly router = inject(Router)
+  private jwtSvc = inject(JwtService)
+
+  isUserLogged = computed(()=> this.jwtSvc.tokenExist())
+
+  goTo(path:string) {
+    this.router.navigate([`/${path}`]);
   }
 }

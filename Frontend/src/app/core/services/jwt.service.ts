@@ -1,44 +1,66 @@
-import { inject, Injectable, signal } from '@angular/core';
-import { jwtDecode } from 'jwt-decode'
-import { Volunteer } from '../../shared/models/volunteer.interface';
+import { effect, inject, Injectable, signal } from '@angular/core';
+import { jwtDecode } from 'jwt-decode';
+import { Router } from '@angular/router';
+import { TokenData } from '../../shared/models/jwt.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JwtService {
 
-  private _decodedToken = signal<any | null>(this.loadToken())
-  private _isLogged = signal<boolean>(!!localStorage.getItem('token'));
-  private user = signal<Partial<Volunteer>>({})
+  private router = inject(Router);
 
-  private loadToken(){
-    const token = localStorage.getItem('token')
-    return token ? this.decodeToken(token) : null
+  tokenExist = signal<boolean>(!!localStorage.getItem('token'));
+  user = signal<Omit<TokenData,'token'> | null>(null)
+  private _decodedToken = signal<any | null>(this.loadToken());
+
+  constructor(){
+    effect(()=>{
+      const data = localStorage.getItem('user')
+      if(data){
+        this.user.set(JSON.parse(data))
+        this.tokenExist.set(true)
+        this._decodedToken.set(localStorage.getItem('token'))
+      }
+    })
   }
 
-  get isLogged(){
-    return this._isLogged
+  login(response: TokenData): void {
+    const {token, ...rest} = response
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(rest))
+    this.tokenExist.set(true);
+    this.user.set(rest)
+    this._decodedToken.set(this.decodeToken(token));
+    this.router.navigate(['/main/feed'], { replaceUrl: true });
   }
 
-  get userLogged(){
-    const userid = this.currentUser.sub
-    return userid
+  logout(): void {
+    localStorage.removeItem('token');
+    this.tokenExist.set(false);
+    this._decodedToken.set(null);
+    this.user.set(null)
+    this.router.navigate(['/home'], { replaceUrl: true });
   }
 
-  decodeToken(token:string){
+  isLogged(): boolean {
+    return this.tokenExist();
+  }
+
+  private loadToken() {
+    const token = localStorage.getItem('token');
+    return token ? this.decodeToken(token) : null;
+  }
+
+  private decodeToken(token: string) {
     try {
-      return  jwtDecode(token)
+      return jwtDecode(token);
     } catch (error) {
-      return null
+      return null;
     }
   }
 
-  get currentUser(){
-    return this._decodedToken()
+  get currentUser() {
+    return this.user();
   }
-
-  get decodedToken(){
-    return this._decodedToken;
-  }
-
 }

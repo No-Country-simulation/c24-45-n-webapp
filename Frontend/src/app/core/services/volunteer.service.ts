@@ -21,7 +21,8 @@ export class VolunteerService {
   }
 
   updateVolunteer(id:number, volunteer:Partial<Volunteer>){
-    return this._http.patch(`${this._baseUrl}/${id}`, {...volunteer})
+    console.log(volunteer)
+    return this._http.patch(`${this._baseUrl}/${id}`, {volunteer})
   }
 
   deleteVolunteer(id:number){

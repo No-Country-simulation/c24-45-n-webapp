@@ -1,82 +1,136 @@
-  <div class="mt-8 w-screen pb-8">
+<div class="mt-8 w-screen pb-8">
   <form [formGroup]="miFormulario" (ngSubmit)="onSubmit()">
+    <div class="formulario-perfil">
+      <h2 class="introform">Completa tu perfil para empezar esta experiencia</h2>
+      <h2 class="tipoform">Voluntario</h2>
+      <h1 class="sub-campos">Campos obligatorios<span class="required">*</span></h1>
+      <br>
+      <div class="contenedor-columnas">
+        <div class="campos-obligatorios">
 
-      <div class="formulario-perfil">
-        <h2 class="introform">Completa tu perfil para empezar esta experiencia</h2>
-        <h2 class="tipoform">Voluntario</h2>
-        <h1 class="sub-campos">Campos obligatorios<span class="required">*</span></h1>
-        <br>
-        <div class="contenedor-columnas">
-          <div class="campos-obligatorios">
-
-            <label for="names">Names<span class="required">*</span></label>
-            <input type="text" id="names" />
-
-            <label for="surnames">Surnames<span class="required">*</span></label>
-            <input type="text" id="surnames" />
-
-            <label for="birthday">Birthday<span class="required">*</span></label>
-            <input type="date" id="birthday" />
-
-            <label for="country">Country<span class="required">*</span></label>
-            <select id="country">
-              <option value="ecuador">Ecuador</option>
-            </select>
-
-            <label for="province">Province<span class="required">*</span></label>
-            <select id="province">
-              <option value="guayas">Guayas</option>
-            </select>
-
-            <label for="city">City<span class="required">*</span></label>
-            <select id="city">
-              <option value="guayaquil">Guayaquil</option>
-            </select>
-
-            <label for="volunteer-preference">Volunteer <br> preference</label>
-            <input type="text" id="volunteer-preference" />
-
-            <label for="skills">Skills</label>
-            <textarea id="skills"></textarea>
+          <label for="name">Name<span class="required">*</span></label>
+          <div class="input-container">
+            <input type="text" id="name" formControlName="name" />
+            <span *ngIf="miFormulario.get('name')?.invalid && formSubmitted" class="error-message">
+              <span *ngIf="miFormulario.get('name')?.errors?.['required']">Campo requerido</span>
+            </span>
           </div>
 
-          <div class="columna-derecha">
-              <div class="avatar">
-                  <label for="avatar-upload">
-                    <img [src]="avatarPreview || 'tu-avatar.jpg'" alt="Avatar" />
-                    <span class="upload-message">Selecciona tu foto de perfil</span>
-                  </label>
-                  <input type="file" id="avatar-upload" accept="image/*" (change)="onFileChange($event)" style="display: none;" />
-                </div>
-            <div class="informacion-no-publica">
+          <label for="lastname">Lastname<span class="required">*</span></label>
+          <div class="input-container">
+            <input type="text" id="lastname" formControlName="lastname" />
+            <span *ngIf="miFormulario.get('lastname')?.invalid && formSubmitted" class="error-message">
+              <span *ngIf="miFormulario.get('lastname')?.errors?.['required']">Campo requerido</span>
+            </span>
+          </div>
 
+          <label for="birthday">Birthday<span class="required">*</span></label>
+          <div class="input-container">
+            <input type="date" id="birthday" formControlName="birthday" />
+            <span *ngIf="miFormulario.get('birthday')?.invalid && formSubmitted" class="error-message">
+              <span *ngIf="miFormulario.get('birthday')?.errors?.['required']">Campo requerido</span>
+            </span>
+          </div>
+
+          <label for="country">Country<span class="required">*</span></label>
+          <div class="input-container">
+            <select id="country" formControlName="country">
+              <option value="ecuador">Ecuador</option>
+            </select>
+            <span *ngIf="miFormulario.get('country')?.invalid && formSubmitted" class="error-message">
+              <span *ngIf="miFormulario.get('country')?.errors?.['required']">Campo requerido</span>
+            </span>
+          </div>
+
+          <label for="state">State<span class="required">*</span></label>
+          <div class="input-container">
+            <select id="state" formControlName="state">
+              <option value="guayas">Guayas</option>
+            </select>
+            <span *ngIf="miFormulario.get('state')?.invalid && formSubmitted" class="error-message">
+              <span *ngIf="miFormulario.get('state')?.errors?.['required']">Campo requerido</span>
+            </span>
+          </div>
+
+          <label for="city">City<span class="required">*</span></label>
+          <div class="input-container">
+            <select id="city" formControlName="city">
+              <option value="guayaquil">Guayaquil</option>
+            </select>
+            <span *ngIf="miFormulario.get('city')?.invalid && formSubmitted" class="error-message">
+              <span *ngIf="miFormulario.get('city')?.errors?.['required']">Campo requerido</span>
+            </span>
+          </div>
+
+
+          <label for="preference">Volunteer <span class="required">*</span> <br> Preference</label>
+          <div class="input-container">
+            <select id="preference" formControlName="preference">
+              <option value="ENVIRONMENTALIST">ENVIRONMENTALIST</option>
+              <option value="GERIATRICIAN">GERIATRICIAN</option>
+              <option value="ANIMALIST">ANIMALIST</option>
+              <option value="EDUCATIONAL">EDUCATIONAL</option>
+              <option value="HEALTH">HEALTH</option>
+              <option value="CULTURAL">CULTURAL</option>
+              <option value="CONSTRUCTION">CONSTRUCTION</option>
+              <option value="GENERAL">GENERAL</option>
+            </select>
+            <span *ngIf="miFormulario.get('preference')?.invalid && formSubmitted" class="error-message">
+              <span *ngIf="miFormulario.get('preference')?.errors?.['required']">Campo requerido</span>
+            </span>
+          </div>
+
+          <label for="skills">Skills</label>
+          <select id="skills" formControlName="skills">
+            <option value="HEALTH">HEALTH</option>
+            <option value="TUTORIA">TUTORIA</option>
+            <option value="ENVIRONMENT">ENVIRONMENT</option>
+            <option value="TECHNOLOGICAL">TECHNOLOGICAL</option>
+            <option value="LEGALADVISOR">LEGALADVISOR</option>
+            <option value="GENERAL">GENERAL</option>
+            <option value="EMERGENCY">EMERGENCY</option>
+            <option value="PROFESSIONALADVISORY">PROFESSIONALADVISORY</option>
+          </select>
+        </div>
+
+        <div class="columna-derecha">
+          <div class="avatar">
+            <label for="avatar-upload">
+              <img [src]="avatarPreview || 'tu-avatar.jpg'" alt="Avatar" />
+              <span class="upload-message">Selecciona tu foto de perfil</span>
+            </label>
+            <input type="file" id="avatar-upload" accept="image/*" (change)="onFileChange($event)" style="display: none;" />
+          </div>
+          <div class="informacion-no-publica">
             <h1>Información no pública (solo tú la verás)</h1>
             <br>
             <div class="info-novisible">
+
               <label for="phone">Phone<span class="required">*</span></label>
-              <input class="nopublic_input" type="tel" id="phone" />
+              <div class="input-container">
+                <input class="nopublic_input" type="tel" id="phone" formControlName="phone" />
+                <span *ngIf="miFormulario.get('phone')?.invalid && formSubmitted" class="error-message">
+                  <span *ngIf="miFormulario.get('phone')?.errors?.['required']">Campo Requerido</span>
+                </span>
+              </div>
 
-
-              <label for="address">Address<span class="required">*</span></label>
-              <input class="nopublic_input" type="text" id="address" />
-
+              <label for="street">Street<span class="required">*</span></label>
+              <div class="input-container">
+                <input class="nopublic_input" type="text" id="street" formControlName="street" />
+                <span *ngIf="miFormulario.get('street')?.invalid && formSubmitted" class="error-message">
+                  <span *ngIf="miFormulario.get('street')?.errors?.['required']">Campo Requerido.</span>
+                </span>
+              </div>
 
               <label for="zip-code">Zip Code</label>
-              <input class="nopublic_input" type="text" id="zip-code" />
+              <input class="nopublic_input" type="text" id="cp" formControlName="cp" />
             </div>
-
-
-            </div>
-
           </div>
-
-        </div>
-
-        <div class="contenedor-guardar">
-          <button class="guardar" (click)="irMuro()">Guardar</button>
         </div>
       </div>
-
-    </form>
+      <div class="contenedor-guardar">
+        <button type="submit" class="guardar">Guardar</button>
+      </div>
+    </div>
+  </form>
 </div>
-

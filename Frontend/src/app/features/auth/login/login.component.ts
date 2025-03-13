@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { LoginData } from '../../../shared/models/login.interface';
 import { AuthService } from '../../../core/services/auth.service';
+import { JwtService } from '../../../core/services/jwt.service';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +18,9 @@ export class LoginComponent {
   loginForm: FormGroup;
   passwordVisibility = false;
   formSubmitted = false;
-  errorMessage = ''; // Mensaje de error para el usuario
 
   private readonly authSvc = inject(AuthService);
+  private readonly jwtSvc = inject(JwtService);
   private readonly router = inject(Router);
 
   constructor(private fb: FormBuilder, private location: Location) {
@@ -49,8 +50,14 @@ export class LoginComponent {
       console.log('Formulario no válido');
       return;
     }
-    console.log('Inicio de sesión exitoso. Redirigiendo...');
-    this.router.navigate(['/organization-profile'], { replaceUrl: true }); 
+
+    const loginData:LoginData = this.loginForm.getRawValue();
+    this.authSvc.login(loginData).subscribe({
+      next:(res)=>{
+        this.jwtSvc.login(res)
+      },
+      error:e=>console.log(e),
+    });
   }
   
   

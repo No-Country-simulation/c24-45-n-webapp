@@ -4,7 +4,7 @@
       <li class="text-xl text-white font-semibold hover:text-gray-400"><a href="">Inicio</a></li>
       <li class="text-xl text-white font-semibold hover:text-gray-400"><a href="">About us</a></li>
       <li class="text-xl text-white font-semibold hover:text-gray-400"><a href="">Contact</a></li>
-      <button (click)="onSignIn()" class=" cursor-pointer bg-emerald-500 font-semibold text-white px-10 py-2 rounded-2xl hover:bg-emerald-600 transition-colors">Sign in</button>
+      <button (click)="isUserLogged() ? goTo('main/feed'):goTo('login')" class=" cursor-pointer bg-emerald-500 font-semibold text-white px-10 py-2 rounded-2xl hover:bg-emerald-600 transition-colors">{{isUserLogged() ? 'Go to feed' : 'Sign in'}}</button>
     </ul>
   </nav>
   <button class="cursor-pointer block md:hidden sm:hidden">

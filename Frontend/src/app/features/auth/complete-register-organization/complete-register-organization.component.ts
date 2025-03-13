@@ -13,6 +13,11 @@ export class CompleteRegisterOrganizationComponent {
   private readonly router = inject(Router);
 
   profileImage: string = 'assets/default-profile-organization.svg';
+  userData = history.state.registeredData;
+
+  constructor() {
+    console.log(this.userData)
+  }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;

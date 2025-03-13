@@ -15,11 +15,11 @@ export class AuthService {
 
   _http = inject(HttpClient)
 
-  login({ email, password }: LoginData): Observable<any> {
-    return this._http.post<any>(`${this.baseUrl}/login`, { email, password })
+  login({ email, password }: LoginData): Observable<TokenData> {
+    return this._http.post<TokenData>(`${this.baseUrl}/login`, { email, password })
   }
 
-  register({ name, email, password, password2 }: UserRegistrationData): Observable<any> {
-    return this._http.post<any>(`${this.baseUrl}/userregister/register`, {name, email,password, password2})
+  register({ userName, email, password, password2 }: UserRegistrationData): Observable<any> {
+    return this._http.post<any>(`${this.baseUrl}/volunteer/register`, {userName, email,password, password2})
   }
 }
