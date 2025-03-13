@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -19,10 +20,13 @@ public class RegisterOrganizationController {
     private RegisterOrganizationService registerOrganizationService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerOrganization(@RequestBody RegisterOrganizationDto registerOrganizationDto) {
+    public ResponseEntity<Object> registerOrganization(@RequestBody RegisterOrganizationDto registerOrganizationDto) {
         try {
             registerOrganizationService.registerOrganization(registerOrganizationDto);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Organización registrada exitosamente.");
+            String respuesta = "Organización registrada exitosamente.";
+            Map<String, String> response = new HashMap<>();
+            response.put("respuesta", respuesta);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
         } catch (Exception e) {
