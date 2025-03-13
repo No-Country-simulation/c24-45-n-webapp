@@ -1,7 +1,6 @@
 package com.no_country.GivenHands.controller;
 
 import com.no_country.GivenHands.dto.ProjectDTO;
-import com.no_country.GivenHands.exception.MiException;
 import com.no_country.GivenHands.model.Project;
 import com.no_country.GivenHands.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController

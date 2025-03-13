@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 public record ProjectDTO(
+        Long id,
         String name,
         String description,
         String location,
@@ -24,6 +25,7 @@ public record ProjectDTO(
 ) {
     public ProjectDTO(Project project) {
         this(
+                project.getId(),
                 project.getName(),
                 project.getDescription(),
                 project.getLocation(),
