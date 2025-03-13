@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { LoginData } from '../../../shared/models/login.interface';
 import { AuthService } from '../../../core/services/auth.service';
+import { JwtService } from '../../../core/services/jwt.service';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +14,13 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  title = 'Sign in with us'
+  title = 'Sign in with us';
   loginForm: FormGroup;
   passwordVisibility = false;
   formSubmitted = false;
-  private readonly authSvc = inject(AuthService)
-  private readonly router = inject(Router)
+  private readonly authSvc = inject(AuthService);
+  private readonly jwtSvc = inject(JwtService);
+  private readonly router = inject(Router);
 
   constructor(private fb: FormBuilder, private location: Location) {
     this.loginForm = this.fb.group(
@@ -47,14 +49,13 @@ export class LoginComponent {
     if (!this.loginForm.valid) {
       return console.log('Form is invalid');
     }
-    const loginData:LoginData = this.loginForm.getRawValue()
+    const loginData:LoginData = this.loginForm.getRawValue();
     this.authSvc.login(loginData).subscribe({
-      next:r=>{
-        localStorage.setItem('token', r.token)
+      next:(res)=>{
+        this.jwtSvc.login(res)
       },
       error:e=>console.log(e),
-      complete:()=> this.router.navigate(['/'],{replaceUrl:true})
-    })
+    });
   }
 
   // Es para volver a la pagina anterior

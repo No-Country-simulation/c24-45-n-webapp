@@ -2,9 +2,9 @@
     <aside class="w-1/4 p-4 bg-white shadow-md rounded-sm">
       <div class="flex flex-col items-center">
         <img src="./icons/profile.svg" alt="Avatar" class="w-32 h-32 rounded-full mb-4">
-        <h2 class="text-xl font-semibold">Génesis Baquerizo</h2>
-        <p class="text-gray-600">Voluntaria Ambiental</p>
-        <p class="text-sm text-gray-500">Ecuador, Guayaquil</p>
+        <h2 class="text-xl font-semibold">{{user()?.name | titlecase }} {{user()?.lastname | titlecase }} </h2>
+        <p class="text-gray-600">{{user()?.preference}}</p>
+        <p class="text-sm text-gray-500">{{user()?.address?.country}}, {{user()?.address?.city}}</p>
       </div>
       <div class="mt-6">
         <h3 class="text-lg font-semibold mb-2">Proyectos</h3>
@@ -26,7 +26,13 @@
       </div>
 
       <div class="bg-white rounded-lg shadow-md p-4">
-        <project-card />
+        @defer (on viewport) {
+          @for (project of projects(); track $index) {
+            <project-card [project]="project" />
+          }
+        } @placeholder {
+          <span>cargando</span>
+        }
       </div>
 
     </main>

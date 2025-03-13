@@ -1,5 +1,5 @@
 import { NgClass, TitleCasePipe, UpperCasePipe } from '@angular/common';
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { JwtService } from '../../../../core/services/jwt.service';
 import { Router, RouterLink } from '@angular/router';
 import { VolunteerService } from '../../../../core/services/volunteer.service';
@@ -16,23 +16,10 @@ export class MainNavbarComponent {
   private readonly volunteerSvc = inject(VolunteerService)
   private readonly router = inject(Router)
 
-  user = signal<any | null>(null)
-
-  constructor(){
-    this.getUserLogged()
-  }
-
-  getUserLogged(){
-    this.volunteerSvc.getVolunteerById(this.jwtSvc.userLogged).subscribe({
-      next:r=>{
-        this.user.set(r)
-      }
-    })
-  }
+  user = computed(()=>this.jwtSvc.currentUser)
 
   onLogout(){
-    localStorage.removeItem('token')
-    this.router.navigate(['/home'], {replaceUrl:true})
+    this.jwtSvc.logout()
   }
 
   toggleMenu(){

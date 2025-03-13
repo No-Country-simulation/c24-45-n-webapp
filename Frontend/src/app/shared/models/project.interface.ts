@@ -1,11 +1,14 @@
 
 export interface Project {
-  name:           string;
-  description:    string;
-  location:       string;
-  typeOfActivity: string;
-  startDate:      Date;
-  endDate:        Date;
-  skillsRequired: string;
-  organizationId: number;
+  name:                string;
+  description:         string;
+  location:            string;
+  typeOfActivity:      string;
+  startDate:           Date;
+  endDate:             Date;
+  skillsRequired:      string;
+  organizationId:      number;
+  organizationName:    string;
+  organizationPhone:   number;
+  organizationWebsite: string;
 }
