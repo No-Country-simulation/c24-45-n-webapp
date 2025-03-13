@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/volunteer")
@@ -15,12 +18,15 @@ public class RegisterVolunteerController {
     private RegisterVolunteerService registerVolunteerService;
 
     @PostMapping("/register")
-    public ResponseEntity regiterUser(@RequestBody RegisterVolunteerDTO registerVolunteerDTO) {
+    public ResponseEntity<Object> regiterUser(@RequestBody RegisterVolunteerDTO registerVolunteerDTO) {
         try {
             registerVolunteerService.regiterUserVolunteer(registerVolunteerDTO);
-            return ResponseEntity.ok("Usuario Voluntario Registrado!!");
+            String respuesta = "Usuario Voluntario Registrado!!";
+            Map<String, String> response = new HashMap<>();
+            response.put("respuesta", respuesta);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 

@@ -3,8 +3,8 @@ import { inject, Injectable } from '@angular/core';
 import { LoginData } from '../../shared/models/login.interface';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { TokenData } from '../../shared/models/jwt.interface';
 import { UserRegistrationData } from '../../shared/models/user.interface';
+
 
 @Injectable({
   providedIn: 'root'

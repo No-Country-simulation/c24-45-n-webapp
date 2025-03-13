@@ -2,6 +2,7 @@ package com.no_country.GivenHands.service;
 
 import com.no_country.GivenHands.dto.RegisterOrganizationDto;
 import com.no_country.GivenHands.dto.UserDTO;
+import com.no_country.GivenHands.model.Address;
 import com.no_country.GivenHands.model.Organization;
 import com.no_country.GivenHands.model.RegisterUser;
 import com.no_country.GivenHands.model.enumeration.Rol;
@@ -24,11 +25,18 @@ public class RegisterOrganizationService {
     private OrganizationRepository organizationRepository;
 
     @Transactional
-    public void registerOrganization(RegisterOrganizationDto registerOrganizationDto)throws IllegalArgumentException {
-        validationRegisterOrganization(registerOrganizationDto.userName(), registerOrganizationDto.email(),
-                registerOrganizationDto.password(), registerOrganizationDto.password2(), registerOrganizationDto.name(),
-                registerOrganizationDto.description());
+    public void registerOrganization(RegisterOrganizationDto registerOrganizationDto) throws IllegalArgumentException {
+        // Validar los datos de entrada
+        validationRegisterOrganization(
+                registerOrganizationDto.userName(),
+                registerOrganizationDto.email(),
+                registerOrganizationDto.password(),
+                registerOrganizationDto.password2(),
+                registerOrganizationDto.name(),
+                registerOrganizationDto.description()
+        );
 
+        // Crear y guardar el usuario registrado
         RegisterUser newRegisterUser = new RegisterUser();
         newRegisterUser.setUserName(registerOrganizationDto.userName());
         newRegisterUser.setEmail(registerOrganizationDto.email());
@@ -36,12 +44,20 @@ public class RegisterOrganizationService {
         newRegisterUser.setRol(Rol.ORGANIZATION);
         registerUserRepository.save(newRegisterUser);
 
-        Organization organization = new Organization();
+        // Construir la dirección manualmente
+        Address address = new Address();
+        address.setCountry(registerOrganizationDto.country());
+        address.setState(registerOrganizationDto.state());
+        address.setCity(registerOrganizationDto.city());
+        address.setStreet(registerOrganizationDto.street());
+        address.setCp(registerOrganizationDto.cp());
 
+        // Crear y guardar la organización
+        Organization organization = new Organization();
         organization.setName(registerOrganizationDto.name());
         organization.setDescription(registerOrganizationDto.description());
         organization.setCause(registerOrganizationDto.cause());
-        organization.setAddress(registerOrganizationDto.address());
+        organization.setAddress(address);
         organization.setPhone(registerOrganizationDto.phone());
         organization.setWebSite(registerOrganizationDto.webSite());
         organization.setSocialMedia(registerOrganizationDto.socialMedia());

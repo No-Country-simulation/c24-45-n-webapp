@@ -1,17 +1,20 @@
 package com.no_country.GivenHands.controller;
 
 import com.no_country.GivenHands.dto.OrganizationDTO;
+import com.no_country.GivenHands.dto.ProjectDTO;
+import com.no_country.GivenHands.dto.RequestVolunteerDTO;
 import com.no_country.GivenHands.dto.VolunteerDTO;
-import com.no_country.GivenHands.model.Project;
-import com.no_country.GivenHands.model.Volunteer;
 import com.no_country.GivenHands.service.VolunteerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/volunteer")
 public class VolunteerController {
@@ -32,12 +35,12 @@ public class VolunteerController {
 
     // Editar voluntario
     @PatchMapping("/{id}")
-    public ResponseEntity<Object> updateVolunteer(@PathVariable Long id, @RequestBody Volunteer volunteer) {
-        VolunteerDTO updatedVolunteer = volunteerService.updateVolunteer(id, volunteer);
-        if (updatedVolunteer != null) {
+    public ResponseEntity<Object> updateVolunteer(@PathVariable Long id, @RequestBody RequestVolunteerDTO request) {
+        try {
+            VolunteerDTO updatedVolunteer = volunteerService.updateVolunteer(id, request);
             return ResponseEntity.ok(updatedVolunteer);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el voluntario con ID: " + id);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
@@ -47,4 +50,16 @@ public class VolunteerController {
         volunteerService.deleteVolunteerById(id);
         return ResponseEntity.ok("Voluntario eliminado !!!");
     }
+
+    // Listar proyectos asociados a un voluntario
+    @GetMapping("/{id}/projects")
+    public ResponseEntity<List<ProjectDTO>> getVolunteerProjects(@PathVariable Long id) {
+        List<ProjectDTO> projects = volunteerService.getProjectsByVolunteerId(id);
+        if (projects.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.emptyList()); // Devuelve una lista vacía si no hay proyectos
+        }
+        return ResponseEntity.ok(projects);
+    }
+
 }

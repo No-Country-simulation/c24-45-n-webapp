@@ -1,9 +1,14 @@
 package com.no_country.GivenHands.service;
 
+import com.no_country.GivenHands.dto.ProjectDTO;
+import com.no_country.GivenHands.dto.RequestVolunteerDTO;
 import com.no_country.GivenHands.dto.UserDTO;
 import com.no_country.GivenHands.dto.VolunteerDTO;
+import com.no_country.GivenHands.model.Address;
+import com.no_country.GivenHands.model.Project;
 import com.no_country.GivenHands.model.RegisterUser;
 import com.no_country.GivenHands.model.Volunteer;
+import com.no_country.GivenHands.repository.ProjectRepository;
 import com.no_country.GivenHands.repository.RegisterUserRepository;
 import com.no_country.GivenHands.repository.VolunteerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +17,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class VolunteerService {
@@ -20,6 +28,7 @@ public class VolunteerService {
     private VolunteerRepository volunteerRepository;
     @Autowired
     private RegisterUserRepository registerUserRepository;
+    private ProjectRepository projectRepository;
 
     // Buscar voluntario por id
 //    public Optional<VolunteerDTO> getVolunteerById(Long id) {
@@ -48,58 +57,64 @@ public class VolunteerService {
 
 
     // Editar voluntario
-    public VolunteerDTO updateVolunteer(Long id, Volunteer volunteerDetails) {
+    public VolunteerDTO updateVolunteer(Long id, RequestVolunteerDTO request) {
         return volunteerRepository.findById(id).map(existingVolunteer -> {
             // Verifica y actualiza los campos si no son nulos
-            if (volunteerDetails.getName() != null) {
-                existingVolunteer.setName(volunteerDetails.getName());
+            if (request.name() != null) {
+                existingVolunteer.setName(request.name());
             }
-            if (volunteerDetails.getLastname() != null) {
-                existingVolunteer.setLastname(volunteerDetails.getLastname());
+            if (request.lastname() != null) {
+                existingVolunteer.setLastname(request.lastname());
             }
-            if (volunteerDetails.getAge() > 0) {
-                existingVolunteer.setAge(volunteerDetails.getAge());
-                // Validar la edad calculada a partir de la fecha de nacimiento
-                int calculatedAge = calculateAge(volunteerDetails.getBirthday());
-                if (calculatedAge < 18) {
-                    throw new IllegalArgumentException("El voluntario debe tener al menos 18 años.");
+            // Validar si la fecha de nacimiento es válida y el voluntario tiene al menos 18 años
+            if (request.birthday() != null) {
+                int age = Period.between(request.birthday(), LocalDate.now()).getYears();
+                if (age < 18) {
+                    throw new IllegalArgumentException("El voluntario debe ser mayor de 18 años.");
                 }
-                existingVolunteer.setAge(calculatedAge);
+                existingVolunteer.setBirthday(request.birthday());
+                existingVolunteer.setAge(age); // Se actualiza la edad
             }
-            if (volunteerDetails.getPhone() > 0) {
-                existingVolunteer.setPhone(volunteerDetails.getPhone());
+            if (request.phone() != null && request.phone() > 0) {
+                existingVolunteer.setPhone(request.phone());
             }
-            if (volunteerDetails.getBirthday() != null) {
-                existingVolunteer.setBirthday(volunteerDetails.getBirthday());
+            if (request.preference() != null) {
+                existingVolunteer.setPreference(request.preference());
             }
-            if (volunteerDetails.getPreference() != null) {
-                existingVolunteer.setPreference(volunteerDetails.getPreference());
+            if (request.skills() != null) {
+                existingVolunteer.setSkills(request.skills());
             }
-            if (volunteerDetails.getSkills() != null) {
-                existingVolunteer.setSkills(volunteerDetails.getSkills());
-            }
-            if (volunteerDetails.getAddress() != null) {
-                existingVolunteer.setAddress(volunteerDetails.getAddress());
+            if (request.country() != null || request.state() != null || request.city() != null ||
+                    request.street() != null || request.cp() != null) {
+
+                Address address = existingVolunteer.getAddress();
+                if (address == null) {
+                    address = new Address(); // Crear una nueva dirección si no existe
+                }
+                if (request.country() != null) {
+                    address.setCountry(request.country());
+                }
+                if (request.state() != null) {
+                    address.setState(request.state());
+                }
+                if (request.city() != null) {
+                    address.setCity(request.city());
+                }
+                if (request.street() != null) {
+                    address.setStreet(request.street());
+                }
+                if (request.cp() != null) {
+                    address.setCp(request.cp());
+                }
+                existingVolunteer.setAddress(address);
             }
 
-            // Buscando el registerUser en la BD
-            if (volunteerDetails.getRegisterUser() != null) {
-                RegisterUser user = registerUserRepository.findById(volunteerDetails.getRegisterUser().getId())
-                        .orElseThrow(() -> new RuntimeException("Registro de usuario no encontrado"));
-                existingVolunteer.setRegisterUser(user);
-            }
-
-            // Guarda los cambios en la base de datos
+            // Guardar cambios en la BD
             Volunteer updatedVolunteer = volunteerRepository.save(existingVolunteer);
 
-            // Retorna el DTO en lugar del objeto de entidad
+            // Devolver como VolunteerDTO
             return new VolunteerDTO(updatedVolunteer);
         }).orElseThrow(() -> new RuntimeException("No se encontró el voluntario con ID: " + id));
-    }
-
-    public int calculateAge(LocalDate birthday) {
-        if (birthday == null) return 0;
-        return Period.between(birthday, LocalDate.now()).getYears();
     }
 
     // Eliminar voluntario
@@ -110,4 +125,14 @@ public class VolunteerService {
             throw new RuntimeException("Voluntario no encontrado con el id: " + id);
         }
     }
+
+    // Listar todos los proyectos de un voluntario
+    public List<ProjectDTO> getProjectsByVolunteerId(Long volunteerId) {
+        return volunteerRepository.findById(volunteerId)
+                .map(volunteer -> volunteer.getProjects().stream()
+                        .map(ProjectDTO::new) // Convertimos cada `Project` en `ProjectDTO`
+                        .collect(Collectors.toList()))
+                .orElse(Collections.emptyList()); // Si no se encuentra el voluntario, devuelve lista vacía
+    }
+
 }

@@ -62,9 +62,23 @@ public class ProjectService {
     public List<ProjectDTO> getAllProjects() {
         return projectRepository.findAll().stream().map(ProjectDTO::new).collect(Collectors.toList());
     }
-    public Optional<ProjectDTO> getProjectById(Long id) {
-        return projectRepository.findById(id).map(ProjectDTO::new);
+    public ProjectDTO getProjectById(Long id) {
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Proyecto no encontrado con ID: " + id));
+
+        return new ProjectDTO(project);
     }
+
+
+    public List<ProjectDTO> getProjectsByOrganization(Long organizationId) {
+        Organization organization = organizationRepository.findById(organizationId)
+                .orElseThrow(() -> new RuntimeException("Organización no encontrada con ID: " + organizationId));
+
+        return projectRepository.findByOrganization(organization).stream()
+                .map(ProjectDTO::new)
+                .collect(Collectors.toList());
+    }
+
 
     public Project updateProject(Long id, Project projectDetails) {
         Optional<Project> projectOptional = projectRepository.findById(id);

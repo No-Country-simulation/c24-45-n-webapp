@@ -1,0 +1,87 @@
+* [33m3aef507[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m)[m Guardar cambios locales antes de revertir el merge
+*   [33m85706e3[m[33m ([m[1;31morigin/feature-frontend/login[m[33m, [m[1;32mfeature-frontend/login[m[33m)[m redirect a login implementado en home
+[32m|[m[33m\[m  
+* [33m|[m [33m1545d69[m guardado antes del pull de develop
+* [33m|[m [33m1d1d44d[m Diseno y login corregidos y modificados
+* [33m|[m [33mbe6ae36[m opacity agregado
+* [33m|[m [33m26a329d[m implementacion de login actualizado
+* [33m|[m [33m86bca7a[m implementacion de login
+[33m|[m [33m|[m *   [33mc48f363[m[33m ([m[1;31morigin/feature-frontend/register[m[33m, [m[1;32mfeature-frontend/register[m[33m)[m implementado el link de regisrtro en home
+[33m|[m [33m|[m [34m|[m[33m\[m  
+[33m|[m [33m|[m [34m|[m[33m/[m  
+[33m|[m [33m|[m[33m/[m[34m|[m   
+[33m|[m [33m|[m * [33mc956114[m commit antes del pull de develop
+[33m|[m [33m|[m * [33m1ed4275[m Diseno y registro voluntario creado
+[33m|[m [33m|[m * [33m1aaf49d[m Guardar cambios en register.component.html y register.component.ts
+[33m|[m [33m|[m * [33mdd58dec[m cambios en la logica y se transformo el registro en un modal
+[33m|[m [33m|[m * [33md2ecfbc[m Implementacion del registro
+[33m|[m [33m|[m [35m|[m * [33m61ad5fb[m[33m ([m[1;31morigin/feature-frontend/complete-organization-registration[m[33m, [m[1;32mfeature-frontend/complete-organization-registration[m[33m)[m formulario de completar info organizacion
+[33m|[m [33m|[m [35m|[m[33m/[m  
+[33m|[m [33m|[m[33m/[m[35m|[m   
+[33m|[m * [35m|[m   [33m6270de6[m Merge pull request #8 from No-Country-simulation/feature-frontend/home
+[33m|[m [1;31m|[m[1;32m\[m [35m\[m  
+[33m|[m [1;31m|[m * [35m\[m   [33m84f0ff3[m[33m ([m[1;31morigin/feature-frontend/home[m[33m)[m Merge branch 'develop' of https://github.com/No-Country-simulation/c24-45-n-webapp into feature-frontend/home
+[33m|[m [1;31m|[m [1;33m|[m[1;31m\[m [35m\[m  
+[33m|[m [1;31m|[m [1;33m|[m[1;31m/[m [35m/[m  
+[33m|[m [1;31m|[m[1;31m/[m[1;33m|[m [35m|[m   
+[33m|[m * [1;33m|[m [35m|[m   [33mdb9583a[m Merge pull request #7 from No-Country-simulation/feature-backend/docker-config
+[33m|[m [1;35m|[m[1;36m\[m [1;33m\[m [35m\[m  
+[33m|[m [1;35m|[m * [1;33m|[m [35m|[m [33me037ab4[m Configuracion Docker
+[33m|[m [1;35m|[m[1;35m/[m [1;33m/[m [35m/[m  
+[33m|[m * [1;33m|[m [35m|[m [33m7ebdd0a[m Revert "Merge pull request #6 from No-Country-simulation/feature-backend/config-docker"
+[33m|[m * [1;33m|[m [35m|[m [33m6406b42[m Merge pull request #6 from No-Country-simulation/feature-backend/config-docker
+[33m|[m[33m/[m[32m|[m [1;33m|[m [35m|[m 
+[33m|[m * [1;33m|[m [35m|[m [33mbdcedf1[m Configuracion de docker y docker compose
+[33m|[m[33m/[m [1;33m/[m [35m/[m  
+[33m|[m * [35m|[m [33m40432c2[m fix: custom button was removed
+[33m|[m * [35m|[m [33mcd0a5bb[m feat: new starter section and responsive design for mobile added
+[33m|[m * [35m|[m [33m9e40510[m feat: some icons added
+[33m|[m * [35m|[m [33m48cca8b[m feat: logo image added
+[33m|[m * [35m|[m [33m9f9f123[m feat: icon added
+[33m|[m * [35m|[m   [33m92aa594[m Merge branch 'develop' of https://github.com/No-Country-simulation/c24-45-n-webapp into feature-frontend/home
+[33m|[m [33m|[m[33m\[m [35m\[m  
+[33m|[m [33m|[m[33m/[m [35m/[m  
+[33m|[m[33m/[m[33m|[m [35m|[m   
+* [33m|[m [35m|[m   [33ma5d2b92[m Merge pull request #5 from No-Country-simulation/feature-backend/organization-register
+[35m|[m[36m\[m [33m\[m [35m\[m  
+[35m|[m * [33m|[m [35m|[m [33mb733bbd[m Creacion del registro de organizaciones
+[35m|[m[35m/[m [33m/[m [35m/[m  
+* [33m|[m [35m|[m   [33m41a803e[m Merge pull request #4 from No-Country-simulation/feature-backend/login-user
+[35m|[m[1;32m\[m [33m\[m [35m\[m  
+[35m|[m [1;32m|[m[35m_[m[33m|[m[35m/[m  
+[35m|[m[35m/[m[1;32m|[m [33m|[m   
+[35m|[m * [33m|[m [33m43af5c5[m Authentication Login user
+[35m|[m[35m/[m [33m/[m  
+* [33m|[m   [33m2fda9c2[m Merge pull request #3 from No-Country-simulation/feature-backend/register-user
+[1;33m|[m[1;34m\[m [33m\[m  
+[1;33m|[m * [33m|[m [33m4f34380[m create endpoint register user
+[1;33m|[m[1;33m/[m [33m/[m  
+[1;33m|[m * [33m524f61d[m feat: home page added
+[1;33m|[m * [33mf48c06f[m feat: custom get started button added
+[1;33m|[m * [33me400b54[m feat: navbar component added
+[1;33m|[m * [33mf21b74d[m feat: footer component added
+[1;33m|[m * [33ma5cd379[m feat: company data added
+[1;33m|[m * [33me578b7d[m feat: company interface added
+[1;33m|[m * [33m005e762[m feat: start now component added
+[1;33m|[m * [33me587430[m feat: companies  working component added
+[1;33m|[m * [33m6d2a787[m feat: about us component added
+[1;33m|[m * [33mc86f8ff[m feat: home route added
+[1;33m|[m * [33m13036df[m feat: font was added
+[1;33m|[m * [33m5446fa8[m feat: some code was removed less outlet
+[1;33m|[m * [33m22f3ae9[m feat: some lines were added
+[1;33m|[m * [33m31cd13d[m feat: some images were added
+[1;33m|[m * [33md276f28[m feat: some icons were added
+[1;33m|[m * [33m8514d25[m feat: archivos editados
+[1;33m|[m[1;33m/[m  
+*   [33mfbd17b6[m Merge pull request #2 from No-Country-simulation/feature-backend/project-endpoint
+[1;35m|[m[1;36m\[m  
+[1;35m|[m * [33m7ae1402[m Creando endpoint de registro de project
+[1;35m|[m[1;35m/[m  
+* [33mcb66d45[m Prueba de vinculación con README.md
+*   [33me0590c2[m Merge pull request #1 from No-Country-simulation/feature-backend/model
+[31m|[m[32m\[m  
+[31m|[m * [33mcb28357[m Created model
+[31m|[m[31m/[m  
+* [33m6f2a71a[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m chore: initialize frontend project
+* [33m453b1d8[m Created base project
+* [33mb61aa1a[m Initial commit
