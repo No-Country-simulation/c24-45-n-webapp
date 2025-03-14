@@ -1,0 +1,20 @@
+.project-card-container {
+    display: flex;
+  }
+  
+  .project-card {
+    flex: 3; /* Ocupa más espacio (2 partes) */
+    margin-right: 10px;
+    border: 2px solid black; /* Agrega un borde negro de 2 píxeles */
+    border-radius: 10px; /* Redondea las esquinas */
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Opcional: agrega margen inferior entre tarjetas */
+    margin-left: 30px;
+    margin-right: 30px;
+
+  }
+  
+  .col-span-1 {
+    flex: 1; /* Ocupa menos espacio (1 parte) */
+  }

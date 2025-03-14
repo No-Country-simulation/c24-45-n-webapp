@@ -18,7 +18,7 @@
     </a>
     <a href="#" class="flex flex-col items-center">
       <img src="./icons/bell.svg" class="w-10" alt="bell-ico">
-      <span>Notifications</span>
+      <span>Notificaciones</span>
     </a>
     <button (click)="toggleMenu()" class="w-14 h-14 bg-blue-400 cursor-pointer hover:bg-blue-300 transition-all duration-200 rounded-full relative flex justify-center items-center">
       <span class="text-3xl">{{user()?.user?.userName?.trim()?.charAt(0) | uppercase }}</span>
@@ -36,7 +36,7 @@
         }
       </li>
       <li class="text-2xl w-auto px-2 py-1 cursor-pointer hover:bg-gray-200 hover:text-black rounded-2xl text-center transition-all duration-200">
-        <a (click)="onLogout()">Log out</a>
+        <a (click)="onLogout()">Salir</a>
       </li>
     </ul>
   </div>

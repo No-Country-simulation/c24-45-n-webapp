@@ -36,6 +36,11 @@ export const routes: Routes = [
             import('../../volunteer-form/volunteer-form.component').then((c) => c.VolunteerFormComponent),
         },
         {
+          path: 'project/:id',
+          loadComponent: () =>
+            import('../../project-screen/project-screen.component').then((c) => c.ProjectScreenComponent),
+        },
+        {
           path:'**',
           redirectTo:'feed'
         }

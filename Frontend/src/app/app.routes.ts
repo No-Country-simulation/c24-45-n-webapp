@@ -55,6 +55,11 @@ export const routes: Routes = [
     import('./features/auth/profiles/volunteer-profile/volunteer-profile.component').then((c) => c.VolunteerProfileComponent),
   },
   {
+    path: 'project/:id',
+    loadComponent: () =>
+    import('./project-screen/project-screen.component').then((c) => c.ProjectScreenComponent),
+  },
+  {
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full'

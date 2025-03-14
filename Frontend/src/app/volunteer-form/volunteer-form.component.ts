@@ -13,7 +13,7 @@ import { VolunteerService } from '../core/services/volunteer.service';
   styleUrl: './volunteer-form.component.css'
 })
 export class VolunteerFormComponent implements OnInit {
-  miFormulario!: FormGroup; // Define miFormulario
+  miFormulario!: FormGroup; 
   avatarPreview: string | ArrayBuffer | null = null;
   defaultAvatar = './assets/avatar.jpg';
   formSubmitted = false;
@@ -74,4 +74,5 @@ export class VolunteerFormComponent implements OnInit {
   irMuro() {
     this.router.navigate(['/muro']);
   }
+
 }

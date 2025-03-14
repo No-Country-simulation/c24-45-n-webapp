@@ -6,5 +6,7 @@
       <p class="text-xs text-gray-500">Hace 12 horas</p>
     </div>
   </div>
-  <p>{{project().description}}</p>
+  <a [routerLink]="'/project'">
+    {{project().description}}
+  </a>
 </div>
