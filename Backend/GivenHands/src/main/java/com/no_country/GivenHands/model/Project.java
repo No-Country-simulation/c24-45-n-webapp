@@ -3,10 +3,7 @@ package com.no_country.GivenHands.model;
 import com.no_country.GivenHands.model.enumeration.Activity;
 import com.no_country.GivenHands.model.enumeration.Skill;
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity

@@ -22,22 +22,25 @@ public record VolunteerDTO(
         UserDTO user // Nuevo campo para incluir los datos del usuario
 ) {
     public VolunteerDTO(Volunteer volunteer) {
-        this(volunteer.getName(),
+        this(
+                volunteer.getName(),
                 volunteer.getLastname(),
                 volunteer.getBirthday(),
-                volunteer.getAddress().country(),
-                volunteer.getAddress().state(),
-                volunteer.getAddress().city(),
+                (volunteer.getAddress() != null) ? volunteer.getAddress().getCountry() : null,
+                (volunteer.getAddress() != null) ? volunteer.getAddress().getState() : null,
+                (volunteer.getAddress() != null) ? volunteer.getAddress().getCity() : null,
                 volunteer.getPreference(),
                 volunteer.getPhone(),
-                volunteer.getAddress().street(),
-                volunteer.getAddress().cp(),
+                (volunteer.getAddress() != null) ? volunteer.getAddress().getStreet() : null,
+                (volunteer.getAddress() != null) ? volunteer.getAddress().getCp() : null,
                 volunteer.getSkills(),
                 (volunteer.getRegisterUser() != null) ? volunteer.getRegisterUser().getId() : null,
                 (volunteer.getRegisterUser() != null) ?
-                        new UserDTO(volunteer.getRegisterUser().getUserName(),
+                        new UserDTO(
+                                volunteer.getRegisterUser().getUserName(),
                                 volunteer.getRegisterUser().getEmail(),
-                                volunteer.getRegisterUser().getRol()) : null
+                                volunteer.getRegisterUser().getRol()
+                        ) : null
         );
     }
 }

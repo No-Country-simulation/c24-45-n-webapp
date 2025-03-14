@@ -1,7 +1,6 @@
 package com.no_country.GivenHands.controller;
 
 import com.no_country.GivenHands.dto.ProjectDTO;
-import com.no_country.GivenHands.exception.MiException;
 import com.no_country.GivenHands.model.Project;
 import com.no_country.GivenHands.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -44,14 +42,15 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getProjectById(@PathVariable Long id) {
-        Optional <ProjectDTO> project = projectService.getProjectById(id);
-        if (project != null) {
+    public ResponseEntity<?> getProjectById(@PathVariable Long id) {
+        try {
+            ProjectDTO project = projectService.getProjectById(id);
             return ResponseEntity.ok(project);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontro proyecto con el id: " + id);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateProject(@PathVariable Long id, @RequestBody Project projectDetails) {
@@ -86,4 +85,11 @@ public class ProjectController {
 
         return ResponseEntity.ok(projects);
     }
+
+    @GetMapping("/organization/{organizationId}")
+    public ResponseEntity<List<ProjectDTO>> getProjectsByOrganization(@PathVariable Long organizationId) {
+        List<ProjectDTO> projects = projectService.getProjectsByOrganization(organizationId);
+        return ResponseEntity.ok(projects);
+    }
+
 }

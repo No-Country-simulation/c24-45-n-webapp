@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { JwtService } from '../core/services/jwt.service';
+import { VolunteerService } from '../core/services/volunteer.service';
 
 @Component({
   selector: 'app-volunteer-form',
@@ -16,7 +18,14 @@ export class VolunteerFormComponent implements OnInit {
   defaultAvatar = './assets/avatar.jpg';
   formSubmitted = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  private readonly jwtSvc = inject(JwtService)
+  private readonly volunteerSvc = inject(VolunteerService)
+
+  id = computed(()=>this.jwtSvc.user()?.volunteerId)
+  token = this.jwtSvc.currentUser
+
+  constructor(private fb: FormBuilder, private router: Router) {
+  }
 
   onFileChange(event: any) {
     const file = event.target.files[0];
@@ -32,31 +41,38 @@ export class VolunteerFormComponent implements OnInit {
   ngOnInit() {
     this.avatarPreview = this.defaultAvatar;
     this.miFormulario = this.fb.group({
-      names: ['', Validators.required],
-      surnames: ['', Validators.required],
+      name: ['', Validators.required],
+      lastname: ['', Validators.required],
       birthday: ['', Validators.required],
       country: ['', Validators.required],
-      province: ['', Validators.required],
+      state: ['', Validators.required],
       city: ['', Validators.required],
-      volunteerPreference: ['', Validators.required],
+      preference: ['', Validators.required],
       skills: [''],
-      phone: ['', Validators.required],
-      address: ['', Validators.required],
-      zipCode: [''],
-      avatar: [null],
+      phone: [0, Validators.required],
+      street: ['', Validators.required],
+      cp: [''],
     });
   }
 
-  onSubmit() { 
+  onSubmit() { // Define onSubmit()
     this.formSubmitted = true;
     if (this.miFormulario.valid) {
-      console.log( this.formSubmitted);
-      console.log(this.miFormulario.getRawValue());
-      this.router.navigate(['/muro']);
+      let data = this.miFormulario.getRawValue()
+      data.phone = parseInt(data.phone)
+      this.volunteerSvc.updateVolunteer(this.id()!, data).subscribe({
+        next:r=>{
+          this.router.navigate(['/feed']);
+        },
+        error:e=>console.log(e)
+      })
     }
     else {
       console.log('Formulario inválido');
     }
+  }
+  irMuro() {
+    this.router.navigate(['/muro']);
   }
 
 }

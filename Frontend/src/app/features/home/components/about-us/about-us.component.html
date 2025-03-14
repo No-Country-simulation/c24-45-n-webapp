@@ -10,24 +10,21 @@
       <img class="w-full h-full object-contain" src="./images/mission-icon.svg" alt="">
     </div>
     <div class="flex flex-col max-w-2xl gap-5">
-      <h1 class="text-3xl font-bold ">Our Mission</h1>
-      <h3 class="text-lg">"Is to connect people willing to give their best to create a positive impact in the community. Through volunteering opportunities, we aim to transform lives, promote solidarity, and build a fairer and more equitable future for all."</h3>
+      <h1 class="text-3xl font-bold ">Nuestra misión</h1>
+      <h3 class="text-lg">"Conectamos a personas dispuestas a dar lo mejor de sí para generar un impacto positivo en la comunidad. A través del voluntariado, buscamos transformar vidas, promover la solidaridad y construir un futuro más justo y equitativo para todos."</h3>
     </div>
   </div>
   <div class="flex flex-col md:flex-row gap-20 justify-center items-center">
     <div class="flex flex-col max-w-2xl gap-5">
-      <h1 class="text-3xl font-bold">Why Choose to Work with Us</h1>
-      <h3 class="text-lg">Join our volunteer team and make a difference! Working with us means becoming part of a community passionate about
-      positive change. We offer a collaborative environment where your time and effort are valued, and you’ll have the
-      opportunity to directly impact those who need it most. If you're looking for personal growth, new experiences, and a
-      meaningful way to contribute, this is the perfect place for you. Together, we can achieve great things!</h3>
+      <h1 class="text-3xl font-bold">¿Por qué elegirnos?</h1>
+      <h3 class="text-lg">¡Únete a nuestro equipo de voluntarios y marca la diferencia! Trabajar con nosotros significa formar parte de una comunidad apasionada por el cambio positivo. Ofrecemos un entorno colaborativo donde valoramos tu tiempo y esfuerzo, y tendrás la oportunidad de impactar directamente a quienes más lo necesitan. Si buscas crecimiento personal, nuevas experiencias y una forma significativa de contribuir, este es el lugar perfecto para ti. ¡Juntos podemos lograr grandes cosas!</h3>
       </div>
       <div class="border-4 w-96 h-96 border-emerald-800 rounded-full overflow-hidden">
         <img class="w-96 h-96 object-cover" src="./images/volunteers.jpeg" alt="">
       </div>
     </div>
-    <button (click)="goToRegister()" class="px-10 py-5 bg-emerald-600 hover:bg-emerald-500 transition duration-300 rounded-2xl text-white font-semibold cursor-pointer">
-      Join Us
+    <button (click)="goToRegister()" [ngClass]="{'hidden': isUserLogged()}" class="px-10 py-5 bg-emerald-600 hover:bg-emerald-500 transition duration-300 rounded-2xl text-white font-semibold cursor-pointer">
+      Únete
     </button>
   </div>
 </div>

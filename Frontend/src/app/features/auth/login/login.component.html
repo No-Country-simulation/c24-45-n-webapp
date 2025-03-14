@@ -1,7 +1,7 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 bg-[#00765a] bg-opacity-50 min-h-screen">
     <div class="hidden bg-[#00765a] min-h-screen sm:flex flex-col justify-center items-center p-10">
         <img src="./assets/LogoGiveHand1.svg" class="w-3xl h-3xl mr-5 lg:mr-10 mt-[-60px]" alt="Logo de GiveHand">
-        <h1 class="text-[38px] lg:text-[48px] pl-5 text-white mt-[-40px] lg:mt-[-80px] lg:w-full">One more hand could change the world</h1>
+        <h1 class="text-[38px] lg:text-[48px] pl-5 text-white mt-[-40px] lg:mt-[-80px] lg:w-full">Una mano más podría cambiar el mundo</h1>
     </div>
 
 
@@ -41,7 +41,8 @@
 
         <p class="text-gray-700">
             ¿Aún no tienes una cuenta?
-            <a routerLink="/register" class="text-blue-500 hover:underline font-semibold">Regístrate</a>
+            <a [routerLink]="['/register']" [queryParams]="{type:'volunteer'}"
+            routerLinkActive="router-link-active" class="text-blue-500 hover:underline font-semibold">Regístrate</a>
         </p>
 
         <button type="submit"

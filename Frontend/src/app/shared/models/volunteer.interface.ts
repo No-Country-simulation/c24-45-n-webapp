@@ -22,16 +22,23 @@ export enum Skill {
 }
 
 export interface Volunteer {
-  name:            string;
-  lastname:        string;
-  birthday:        Date;
-  country:         string;
-  state:           string;
-  city:            string;
+  name:            null;
+  lastname:        null;
+  birthday:        null;
+  country:         null;
+  state:           null;
+  city:            null;
   preference:      Preference;
   phone:           number;
-  street:          string;
-  cp:              string;
-  skills:          Skill[];
+  street:          null;
+  cp:              null;
+  skills:          Skill;
   userVolunteerId: number;
+  user:            User;
+}
+
+export interface User {
+  userName: string;
+  email:    string;
+  rol:      string;
 }

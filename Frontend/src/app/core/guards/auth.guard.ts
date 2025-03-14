@@ -1,5 +1,5 @@
 import { CanActivateFn, Router } from '@angular/router';
-import { inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { JwtService } from '../services/jwt.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
@@ -8,8 +8,8 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
 
   function canActivate(){
-    const isLogged = jwtSvc.isLogged
-    if(!isLogged()){
+    const isUserLogged = computed(()=>jwtSvc.tokenExist())
+    if(!isUserLogged()){
       router.navigate(['/login'],{replaceUrl:true})
       return false
     }

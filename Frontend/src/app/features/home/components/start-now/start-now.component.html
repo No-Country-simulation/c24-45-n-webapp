@@ -3,7 +3,7 @@
     <div class="flex flex-col justify-evenly gap-6">
       <div class="flex flex-col gap-6 items-start px-2 md:px-0">
         <div class="text-5xl inline-block bg-white text-emerald-700 px-4 py-2 rounded-2xl font-medium">
-          Welcome To
+          Bienvenidos a
         </div>
         <div class="bg-white rounded-2xl flex flex-row items-center px-5">
           <img src="./images/logo.svg" class="w-36 h-36" alt="logo">
@@ -13,17 +13,17 @@
         </div>
         <div class="w-full text-center">
           <p class="text-white text-2xl font-semibold">
-            Whit more 500 ONG's around the world.
+            Con más de 500 ONG en todo el mundo. 
             <br>
-            Connect with hands to help and release hearts
+            Conecta con las manos para ayudar y liberar corazones.
           </p>
         </div>
       </div>
-      <div class="flex flex-col gap-3 items-center">
-        <span class="text-white text-2xl font-semibold">Start like</span>
+      <div [ngClass]="{'hidden': isUserLogged()}" class="flex flex-col gap-3 items-center">
+        <span class="text-white text-2xl font-semibold">Regístrate como</span>
         <div class="flex flex-col md:flex-row gap-10">
-          <button (click)="onRegister('volunteer')" class="text-2xl cursor-pointer px-12 rounded-2xl py-2 text-white font-bold bg-blue-400 hover:bg-blue-500 transition-all duration-300">Volunteer</button>
-          <button (click)="onRegister('organization')" class="text-2xl cursor-pointer px-12 rounded-2xl py-2 text-black font-bold bg-white hover:bg-gray-300 transition-all duration-300">Organization</button>
+          <button (click)="onRegister('volunteer')" class="text-2xl cursor-pointer px-12 rounded-2xl py-2 text-white font-bold bg-blue-400 hover:bg-blue-500 transition-all duration-300">Voluntario</button>
+          <button (click)="onRegister('organization')" class="text-2xl cursor-pointer px-12 rounded-2xl py-2 text-black font-bold bg-white hover:bg-gray-300 transition-all duration-300">Organización</button>
         </div>
       </div>
     </div>

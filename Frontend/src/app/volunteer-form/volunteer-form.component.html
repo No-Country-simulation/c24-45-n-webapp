@@ -8,23 +8,23 @@
       <div class="contenedor-columnas">
         <div class="campos-obligatorios">
 
-          <label for="names">Names<span class="required">*</span></label>
+          <label for="name">Nombre<span class="required">*</span></label>
           <div class="input-container">
-            <input type="text" id="names" formControlName="names" />
-            <span *ngIf="miFormulario.get('names')?.invalid && formSubmitted" class="error-message">
-              <span *ngIf="miFormulario.get('names')?.errors?.['required']">Campo requerido</span>
+            <input type="text" id="name" formControlName="name" />
+            <span *ngIf="miFormulario.get('name')?.invalid && formSubmitted" class="error-message">
+              <span *ngIf="miFormulario.get('name')?.errors?.['required']">Campo requerido</span>
             </span>
           </div>
 
-          <label for="surnames">Surnames<span class="required">*</span></label>
+          <label for="lastname">Apellidos<span class="required">*</span></label>
           <div class="input-container">
-            <input type="text" id="surnames" formControlName="surnames" />
-            <span *ngIf="miFormulario.get('surnames')?.invalid && formSubmitted" class="error-message">
-              <span *ngIf="miFormulario.get('surnames')?.errors?.['required']">Campo requerido</span>
+            <input type="text" id="lastname" formControlName="lastname" />
+            <span *ngIf="miFormulario.get('lastname')?.invalid && formSubmitted" class="error-message">
+              <span *ngIf="miFormulario.get('lastname')?.errors?.['required']">Campo requerido</span>
             </span>
           </div>
 
-          <label for="birthday">Birthday<span class="required">*</span></label>
+          <label for="birthday">Fecha de Nacimiento<span class="required">*</span></label>
           <div class="input-container">
             <input type="date" id="birthday" formControlName="birthday" />
             <span *ngIf="miFormulario.get('birthday')?.invalid && formSubmitted" class="error-message">
@@ -32,7 +32,7 @@
             </span>
           </div>
 
-          <label for="country">Country<span class="required">*</span></label>
+          <label for="country">País<span class="required">*</span></label>
           <div class="input-container">
             <select id="country" formControlName="country">
               <option value="ecuador">Ecuador</option>
@@ -42,17 +42,17 @@
             </span>
           </div>
 
-          <label for="province">Province<span class="required">*</span></label>
+          <label for="state">Provincia<span class="required">*</span></label>
           <div class="input-container">
-            <select id="province" formControlName="province">
+            <select id="state" formControlName="state">
               <option value="guayas">Guayas</option>
             </select>
-            <span *ngIf="miFormulario.get('province')?.invalid && formSubmitted" class="error-message">
-              <span *ngIf="miFormulario.get('province')?.errors?.['required']">Campo requerido</span>
+            <span *ngIf="miFormulario.get('state')?.invalid && formSubmitted" class="error-message">
+              <span *ngIf="miFormulario.get('state')?.errors?.['required']">Campo requerido</span>
             </span>
           </div>
 
-          <label for="city">City<span class="required">*</span></label>
+          <label for="city">Ciudad<span class="required">*</span></label>
           <div class="input-container">
             <select id="city" formControlName="city">
               <option value="guayaquil">Guayaquil</option>
@@ -63,9 +63,9 @@
           </div>
 
 
-          <label for="volunteer-preference">Volunteer <span class="required">*</span> <br> preference</label>
+          <label for="preference">Preferencia<span class="required">*</span> <br> Voluntariado</label>
           <div class="input-container">
-            <select id="volunteerPreference" formControlName="volunteerPreference">
+            <select id="preference" formControlName="preference">
               <option value="ENVIRONMENTALIST">ENVIRONMENTALIST</option>
               <option value="GERIATRICIAN">GERIATRICIAN</option>
               <option value="ANIMALIST">ANIMALIST</option>
@@ -75,12 +75,12 @@
               <option value="CONSTRUCTION">CONSTRUCTION</option>
               <option value="GENERAL">GENERAL</option>
             </select>
-            <span *ngIf="miFormulario.get('volunteerPreference')?.invalid && formSubmitted" class="error-message">
-              <span *ngIf="miFormulario.get('volunteerPreference')?.errors?.['required']">Campo requerido</span>
+            <span *ngIf="miFormulario.get('preference')?.invalid && formSubmitted" class="error-message">
+              <span *ngIf="miFormulario.get('preference')?.errors?.['required']">Campo requerido</span>
             </span>
           </div>
 
-          <label for="skills">Skills</label>
+          <label for="skills">Habilidades</label>
           <select id="skills" formControlName="skills">
             <option value="HEALTH">HEALTH</option>
             <option value="TUTORIA">TUTORIA</option>
@@ -106,7 +106,7 @@
             <br>
             <div class="info-novisible">
 
-              <label for="phone">Phone<span class="required">*</span></label>
+              <label for="phone">Teléfono<span class="required">*</span></label>
               <div class="input-container">
                 <input class="nopublic_input" type="tel" id="phone" formControlName="phone" />
                 <span *ngIf="miFormulario.get('phone')?.invalid && formSubmitted" class="error-message">
@@ -114,16 +114,16 @@
                 </span>
               </div>
 
-              <label for="address">Address<span class="required">*</span></label>
+              <label for="street">Calle<span class="required">*</span></label>
               <div class="input-container">
-                <input class="nopublic_input" type="text" id="address" formControlName="address" />
-                <span *ngIf="miFormulario.get('address')?.invalid && formSubmitted" class="error-message">
-                  <span *ngIf="miFormulario.get('address')?.errors?.['required']">Campo Requerido.</span>
+                <input class="nopublic_input" type="text" id="street" formControlName="street" />
+                <span *ngIf="miFormulario.get('street')?.invalid && formSubmitted" class="error-message">
+                  <span *ngIf="miFormulario.get('street')?.errors?.['required']">Campo Requerido.</span>
                 </span>
               </div>
 
-              <label for="zip-code">Zip Code</label>
-              <input class="nopublic_input" type="text" id="zipCode" formControlName="zipCode" />
+              <label for="zip-code">Código <br> Postal</label>
+              <input class="nopublic_input" type="text" id="cp" formControlName="cp" />
             </div>
           </div>
         </div>

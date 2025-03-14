@@ -1,0 +1,66 @@
+<main-navbar></main-navbar>
+<div class="project-card-container px-4 md:px-10 bg-[#e0f4ee] w-full min-h-screen grid grid-cols-1 md:grid-cols-3 ">
+    <div class="project-card mt-[30px] bg-white">
+        <div class="text-center mb-4">
+            <h1 class="text-2xl md:text-3xl font-semibold">{{project()?.organizationName}}</h1>
+          </div>
+      <div class="project-header mb-[10px]">
+        <h2 class="mt-[10px] ml-[10px] text-lg md:text-xl font-bold">{{project()?.name}}</h2>
+        <p class="mt-[10px] ml-[10px] text-lg md:text-lg font-semibold">{{project()?.location}}</p>
+        <!-- <button class="edit-button">✏️</button> -->
+      </div>
+      <div class="project-image">
+        <div class="flex flex-col items-center">
+          <div class="lg:w-[550px] w-[400px] md:w-[150px] lg:h-[350px] overflow-hidden rounded-2xl mb-[20px]">
+            <img class="w-full h-full object-cover" src="/assets/imagen-voluntarios/adopcion-mascotas.png" alt="Proyecto 2">
+          </div>
+        </div>
+        <div class="project-details flex flex-col items-center">
+          <p class="mt-[10px] text-lg md:text-lg font-semibold"> {{project()?.description}}</p>
+          <p class="mt-[10px] text-lg md:text-lg font-semibold">Fecha: {{project()?.startDate}} </p>
+          <p class="mt-[10px] text-lg md:text-lg font-semibold">Más información: {{project()?.organizationPhone}}</p>
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-span-1">
+      <div class="bg-white p-4 rounded-2xl shadow-lg mt-10">
+        <div class="text-center mb-4">
+          <h1 class="text-2xl md:text-3xl font-semibold">Volunteers</h1>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div class="flex flex-col items-center">
+            <div class="lg:w-[100px] w-[80px] md:w-[60px] lg:h-[110px] overflow-hidden rounded-2xl">
+              <img class="w-full h-full object-cover" src="/assets/imagen-voluntarios/voluntario6.jpg" alt="Proyecto 1">
+            </div>
+            <span class="mt-[10px] text-lg md:text-xl font-medium">Joaquin Diaz</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="lg:w-[100px] w-[80px] md:w-[60px] lg:h-[110px] overflow-hidden rounded-2xl">
+              <img class="w-full h-full object-cover" src="/assets/imagen-voluntarios/voluntario2.jpg" alt="Proyecto 2">
+            </div>
+            <span class="mt-[10px] text-lg md:text-xl font-medium">Rodrigo Perez</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="lg:w-[100px] w-[80px] md:w-[60px] lg:h-[110px] overflow-hidden rounded-2xl">
+              <img class="w-full h-full object-cover" src="/assets/imagen-voluntarios/voluntario3.jpg" alt="Proyecto 3">
+            </div>
+            <span class="mt-[10px] text-lg md:text-xl font-medium">Carolina Saez</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="lg:w-[100px] w-[80px] md:w-[60px] lg:h-[110px] overflow-hidden rounded-2xl">
+              <img class="w-full h-full object-cover" src="/assets/imagen-voluntarios/voluntario1.jpg" alt="Proyecto 4">
+            </div>
+            <span class="mt-[10px] text-lg md:text-xl font-medium ">Cintya Guzman</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="lg:w-[100px] w-[80px] md:w-[60px] lg:h-[110px] overflow-hidden rounded-2xl">
+              <img class="w-full h-full object-cover" src="/assets/imagen-voluntarios/voluntario-tercera-edad.jpg" alt="Proyecto 4">
+            </div>
+            <span class="mt-[10px] text-lg md:text-xl font-medium ">Román Bastidas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
