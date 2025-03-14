@@ -6,7 +6,7 @@ import { MainNavbarComponent } from "./features/main/layout/main-navbar/main-nav
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ReactiveFormsModule, MainNavbarComponent],
+  imports: [RouterOutlet, ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

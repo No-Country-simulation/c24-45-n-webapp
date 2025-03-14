@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-muro',
-  imports: [ProjectCardComponent, TitleCasePipe, MainNavbarComponent, RouterModule],
+  imports: [ProjectCardComponent, TitleCasePipe, RouterModule, MainNavbarComponent],
   templateUrl: './muro.component.html',
   styleUrl: './muro.component.css'
 })
