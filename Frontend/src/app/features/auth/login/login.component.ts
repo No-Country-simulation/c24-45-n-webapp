@@ -50,18 +50,17 @@ export class LoginComponent {
       console.log('Formulario no válido');
       return;
     }
-
-    const loginData:LoginData = this.loginForm.getRawValue();
+  
+    const loginData: LoginData = this.loginForm.getRawValue();
     this.authSvc.login(loginData).subscribe({
-      next:(res)=>{
-        this.jwtSvc.login(res)
+      next: (res) => {
+        this.jwtSvc.login(res);
+  
+        this.router.navigate(['/muro']);
       },
-      error:e=>console.log(e),
+      error: (e) => console.log(e),
     });
   }
-  
-  
-
   // Regresar a la página anterior
   goBack() {
     this.location.back();

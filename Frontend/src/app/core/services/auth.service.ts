@@ -4,6 +4,7 @@ import { LoginData } from '../../shared/models/login.interface';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { UserRegistrationData } from '../../shared/models/user.interface';
+import { TokenData } from '../../shared/models/jwt.interface';
 
 
 @Injectable({
