@@ -4,10 +4,12 @@ import { JwtService } from '../core/services/jwt.service';
 import { TitleCasePipe } from '@angular/common';
 import { ProjectService } from '../core/services/project.service';
 import { Project } from '../shared/models/project.interface';
-//import { MainNavbarComponent } from '../features/main/layout/main-navbar/main-navbar.component';
+import { MainNavbarComponent } from "../features/main/layout/main-navbar/main-navbar.component";
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-muro',
-  imports: [ProjectCardComponent, TitleCasePipe],
+  imports: [ProjectCardComponent, TitleCasePipe, MainNavbarComponent, RouterModule],
   templateUrl: './muro.component.html',
   styleUrl: './muro.component.css'
 })

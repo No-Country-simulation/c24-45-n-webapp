@@ -39,9 +39,11 @@ export class JwtService {
     localStorage.removeItem('token');
     this.tokenExist.set(false);
     this._decodedToken.set(null);
-    this.user.set(null)
+    this.user.set(null);
+
     this.router.navigate(['/home'], { replaceUrl: true });
   }
+  
 
   isLogged(): boolean {
     return this.tokenExist();

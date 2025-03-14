@@ -7,13 +7,17 @@
     <img src="./icons/search.svg" class="w-12" alt="search-ico">
     <input type="text" class="outline-0 placeholder:text-2xl w-full" placeholder="Search">
   </form>
-  <div class="hidden md:flex flex-row gap-3">
+  <div class="hidden md:flex flex-row gap-5">
+      <a href="/muro" class="flex flex-col items-center">
+        <img src="./icons/home.svg" class="w-10" alt="home-ico">
+        <span>Inicio</span>
+      </a>
     <a href="#" class="flex flex-col items-center">
-      <img src="./icons/network.svg" class="w-12" alt="network-ico">
+      <img src="./icons/network.svg" class="w-10" alt="network-ico">
       <span>Networks</span>
     </a>
     <a href="#" class="flex flex-col items-center">
-      <img src="./icons/bell.svg" class="w-12" alt="bell-ico">
+      <img src="./icons/bell.svg" class="w-10" alt="bell-ico">
       <span>Notificaciones</span>
     </a>
     <button (click)="toggleMenu()" class="w-14 h-14 bg-blue-400 cursor-pointer hover:bg-blue-300 transition-all duration-200 rounded-full relative flex justify-center items-center">
@@ -25,10 +29,10 @@
       <li class="text-2xl text-center">{{user()?.user?.userName | titlecase}}</li>
       <hr>
       <li class="text-2xl w-auto px-2 py-1 cursor-pointer hover:bg-gray-200 hover:text-black rounded-2xl text-center transition-all duration-200">
-        @if (user()?.user?.rol==='volunteer') {
-          <a [routerLink]="'/main/volunteer-profile/' + user()?.volunteerId">Perfil</a>
-        }@else {
-          <a [routerLink]="'/main/volunteer-profile/' + user()?.volunteerId">Perfil</a>
+        @if (user()?.user?.rol==='VOLUNTEER') {
+          <a [routerLink]="'/main/volunteer-profile/' + user()?.volunteerId">Profile</a>
+        }@else if (user()?.user?.rol==='ORGANIZATION') {
+          <a [routerLink]="'/main/organization-profile/' + user()?.volunteerId">Profile</a>
         }
       </li>
       <li class="text-2xl w-auto px-2 py-1 cursor-pointer hover:bg-gray-200 hover:text-black rounded-2xl text-center transition-all duration-200">

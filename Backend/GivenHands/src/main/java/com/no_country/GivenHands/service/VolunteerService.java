@@ -57,8 +57,9 @@ public class VolunteerService {
 
 
     // Editar voluntario
-    public VolunteerDTO updateVolunteer(Long id, RequestVolunteerDTO request) {
-        return volunteerRepository.findById(id).map(existingVolunteer -> {
+    public VolunteerDTO updateVolunteer(String id, RequestVolunteerDTO request) {
+        Long volunteerId = Long.parseLong(id);
+        return volunteerRepository.findById(volunteerId).map(existingVolunteer -> {
             // Verifica y actualiza los campos si no son nulos
             if (request.name() != null) {
                 existingVolunteer.setName(request.name());
@@ -114,7 +115,7 @@ public class VolunteerService {
 
             // Devolver como VolunteerDTO
             return new VolunteerDTO(updatedVolunteer);
-        }).orElseThrow(() -> new RuntimeException("No se encontró el voluntario con ID: " + id));
+        }).orElseThrow(() -> new RuntimeException("No se encontró el voluntario con ID: " + volunteerId));
     }
 
     // Eliminar voluntario

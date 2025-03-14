@@ -1,6 +1,7 @@
 export interface TokenData {
   token: string;
   volunteerId: number;
+  organizationId: number;
   name: null;
   lastname: null;
   birthday: null;

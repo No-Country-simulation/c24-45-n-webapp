@@ -13,7 +13,7 @@ export class NavbarComponent {
   private readonly router = inject(Router)
   private jwtSvc = inject(JwtService)
 
-  isUserLogged = computed(()=> this.jwtSvc.tokenExist())
+  isUserLogged = computed(()=> this.jwtSvc.tokenExist());
 
   goTo(path:string) {
     this.router.navigate([`/${path}`]);

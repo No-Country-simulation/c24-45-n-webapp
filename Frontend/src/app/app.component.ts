@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MainNavbarComponent } from "./features/main/layout/main-navbar/main-navbar.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ReactiveFormsModule,],
+  imports: [RouterOutlet, ReactiveFormsModule, MainNavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
