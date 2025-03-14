@@ -35,7 +35,7 @@ public class VolunteerController {
 
     // Editar voluntario
     @PatchMapping("/{id}")
-    public ResponseEntity<Object> updateVolunteer(@PathVariable Long id, @RequestBody RequestVolunteerDTO request) {
+    public ResponseEntity<Object> updateVolunteer(@PathVariable String id, @RequestBody RequestVolunteerDTO request) {
         try {
             VolunteerDTO updatedVolunteer = volunteerService.updateVolunteer(id, request);
             return ResponseEntity.ok(updatedVolunteer);
